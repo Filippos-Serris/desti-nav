@@ -1,12 +1,10 @@
 import { createContext } from "react";
 
 const LocationContext = createContext({
-  street: null,
-  postal: null,
-  country: null,
-  city: null,
-  latitude: null,
-  longitude: null,
+  address: null,
+  lat: null,
+  lng: null,
+  setSelectedLocation: () => {},
 });
 
 export default LocationContext;
