@@ -1,12 +1,18 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
-import Header from "./components/Header.js";
+import Header from "./components/UI/Header.js";
 import Locations from "./components/Locations/Locations.js";
 import LocationContext from "./store/location-context.js";
 import RadiusSearch from "./components/RadiusSearch/RadiusSearch.js";
 import Weather from "./components/Weather.js";
 
 function App() {
+  const [searchesActivated, setSearchesActivated] = useState(false);
+
+  const handleSearchesActivation = () => {
+    setSearchesActivated(true);
+  };
+
   const handleSelectedLocation = (selectedLocation) => {
     ctxValue.address = selectedLocation.address;
     ctxValue.lat = selectedLocation.lat;
@@ -33,16 +39,18 @@ function App() {
       <Header />
 
       <LocationContext.Provider value={ctxValue}>
-        <Locations />
+        <Locations locationSet={handleSearchesActivation} />
 
-        {/*<Landmarks />
-        <Restaurants />*/}
+        {searchesActivated && (
+          <Fragment>
+            <RadiusSearch title={"Landmarks"} pointsOfInterest={landmarks} />
+            <RadiusSearch title={"Restaurants"} pointsOfInterest={foods} />
+            <RadiusSearch title={"Drinks"} pointsOfInterest={drinks} />
+            <RadiusSearch title={"Coffee"} pointsOfInterest={coffee} />
 
-        <RadiusSearch title={"Landmarks"} pointsOfInterest={landmarks} />
-        <RadiusSearch title={"Restaurants"} pointsOfInterest={foods} />
-        <RadiusSearch title={"Drinks"} pointsOfInterest={drinks} />
-        <RadiusSearch title={"Coffee"} pointsOfInterest={coffee} />
-        <Weather />
+            <Weather />
+          </Fragment>
+        )}
       </LocationContext.Provider>
     </Fragment>
   );

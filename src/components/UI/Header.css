@@ -1,0 +1,23 @@
+.navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border-bottom: solid thin black;
+    display: flex;
+    margin: 1rem;
+    height: 3rem;
+}
+
+ul {
+    display: flex;
+    background-color: white;
+    margin-bottom: 0;
+
+}
+
+ul li {
+    margin-right: 1rem;
+    list-style: none;
+}

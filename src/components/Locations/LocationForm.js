@@ -6,14 +6,8 @@ const isEmpty = (value) => value.trim() === "";
 const LocationForm = (props) => {
   const [formInputValidity, setFormInputValidity] = useState({
     street: true,
-    num: true,
-    postal: true,
     country: true,
-    city: true,
   });
-
-  const [mandatoryField, setMandatoryFields] = useState(true);
-
   const streetRef = useRef();
   const postalRef = useRef();
   const countryRef = useRef();
@@ -31,20 +25,18 @@ const LocationForm = (props) => {
 
     setFormInputValidity({
       street: !isEmpty(enteredStreet),
-      postal: !isEmpty(enteredPostal),
       country: !isEmpty(enteredCountry),
-      city: !isEmpty(enteredCity),
-      num: !isEmpty(enteredNum),
     });
 
-    props.onAddress(
-      `${enteredStreet} ${enteredNum}, ${enteredCountry}, ${enteredCity}, ${enteredPostal}`
-    );
+    if (formInputValidity.street && formInputValidity.country) {
+      props.onAddress(
+        `${enteredStreet} ${enteredNum}, ${enteredCountry}, ${enteredCity}, ${enteredPostal}`
+      );
+    }
   };
 
   return (
     <Fragment>
-      <h2>Insert location</h2>
       <form className="form" onSubmit={searchHandler}>
         <div className="inputs">
           <label htmlFor="street">*Street</label>
@@ -53,6 +45,7 @@ const LocationForm = (props) => {
             type="text"
             ref={streetRef}
             placeholder="Spooner Street"
+            className={formInputValidity.street ? null : "false-input"}
           ></input>
         </div>
 
@@ -93,23 +86,11 @@ const LocationForm = (props) => {
             type="text"
             ref={countryRef}
             placeholder="US State"
+            className={formInputValidity.street ? null : "false-input"}
           ></input>
         </div>
-
-        {!mandatoryField && (
-          <p>Street and Country fields are mandatory for location search</p>
-        )}
-
-        <div className="mb-4"></div>
-
-        <button className="rounded-full bg-blue-500 text-white text-md border border-black p-2">
-          Search
-        </button>
+        <button></button>
       </form>
-      <small className="block text-sm text-gray-500 mt-2">
-        Not all fields are mandatory, just those annotated with the * symbol but
-        more information leads to more accurate results
-      </small>
     </Fragment>
   );
 };

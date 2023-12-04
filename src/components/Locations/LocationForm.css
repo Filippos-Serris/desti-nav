@@ -1,42 +1,60 @@
-.form{
+.form {
     display: flex;
+    border: solid thin grey;
+    border-radius: 2rem;
+    padding: 1rem;
+    justify-content: center;
+    background-color: white;
+    margin-top: 6rem;
 }
 
-.inputs{
+
+
+.inputs {
+    display: flex;
+    flex-direction: column;
     height: fit-content;
     width: fit-content;
-    background-color:white;
-    border: solid thin grey;
+    background-color: white;
     margin: 0;
-    padding: 1rem;
+    padding: 0;
     color: grey;
-    flex:1;
+    flex: 1;
+
 }
 
-.inputs label{
+.inputs label {
     margin: 0;
     padding: 0;
     font-size: small;
-    
+
 }
 
-.inputs input{
+.inputs input {
     margin: 0;
     padding: 0;
-    width: 15rem;
+    width: 10rem;
     text-decoration: underline;
-    font-size:large;
+    font-size: large;
+    border: none;
+    outline: none;
+    background-color: white;
 }
 
-.form button{
-    width: fit-content;
-    height: fit-content;
-    background-color: red;
+
+
+.form button {
+    width: 2rem;
+    height: 2rem;
+    background-image: url('../../assets/search-arrow.png');
     border: thin solid grey;
-    border-radius: 5rem;
     font-size: medium;
+    margin: 1rem 0 0 0;
+    background-size: cover;
+    border-radius: 5rem;
+    align-self: center;
 }
 
-
-
-
+.inputs .false-input {
+    border: solid thin red;
+}

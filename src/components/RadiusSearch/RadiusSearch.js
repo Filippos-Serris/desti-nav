@@ -25,7 +25,7 @@ const RadiusSearch = (props) => {
           `https://api.opentripmap.com/0.1/en/places/radius?radius=${params.radius}&lon=${ctxLocation.lng}&lat=${ctxLocation.lat}&kinds=${props.pointsOfInterest}&rate=${params.rate}&format=json&limit=${params.limit}&apikey=${API_KEY}`
         );
         const resData = await res.json();
-        //console.log(resData);
+        console.log(resData);
 
         const returnedObjects = [];
 

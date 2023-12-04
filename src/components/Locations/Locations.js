@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import React from "react";
+
+import "./Locations.css";
 
 import LocationForm from "./LocationForm";
 import LocationList from "./LocationList";
-import Card from "../UI/Card";
-import RadiusSearchForm from "../RadiusSearch/RadiusSearchForm";
 
 const GEOCODING_API_KEY = "845ebdcc2d794f9785f968141732d5d9";
 
-const Locations = () => {
+const Locations = (props) => {
   const [address, setAddress] = useState();
   const [geoResponse, setGeoResponse] = useState([]);
   const [firstLoad, setFirstLoad] = useState(true);
@@ -55,11 +55,13 @@ const Locations = () => {
   }, [address]);
 
   return (
-    <Card>
-      <h2>Locations</h2>
-      <LocationForm onAddress={addressHandler} />
-      <LocationList addresses={geoResponse} />
-    </Card>
+    <Fragment>
+      <div className="form-container">
+        <h2>Discover your next Destination with DestiNav</h2>
+        <LocationForm onAddress={addressHandler} />
+      </div>
+      <LocationList locationSet={props.locationSet} addresses={geoResponse} />
+    </Fragment>
   );
 };
 
