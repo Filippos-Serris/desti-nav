@@ -1,22 +1,26 @@
 import { useContext } from "react";
 import LocationContext from "../../store/location-context";
+import Card from "../UI/Card";
 
 const Location = (props) => {
   const locationCtx = useContext(LocationContext);
+
   const locationHandler = () => {
-    locationCtx.setSelectedLocation(props.location);
+    locationCtx.setSelectedLocation(props.address);
   };
 
   return (
-    <div>
-      <label>{props.location.address}</label>
-      <button
-        onClick={locationHandler}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Select
-      </button>
-    </div>
+    <Card>
+      <li>
+        <label>{props.address.address}</label>
+        <button
+          onClick={locationHandler}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Select
+        </button>
+      </li>
+    </Card>
   );
 };
 

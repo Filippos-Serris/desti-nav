@@ -1,0 +1,42 @@
+.form{
+    display: flex;
+}
+
+.inputs{
+    height: fit-content;
+    width: fit-content;
+    background-color:white;
+    border: solid thin grey;
+    margin: 0;
+    padding: 1rem;
+    color: grey;
+    flex:1;
+}
+
+.inputs label{
+    margin: 0;
+    padding: 0;
+    font-size: small;
+    
+}
+
+.inputs input{
+    margin: 0;
+    padding: 0;
+    width: 15rem;
+    text-decoration: underline;
+    font-size:large;
+}
+
+.form button{
+    width: fit-content;
+    height: fit-content;
+    background-color: red;
+    border: thin solid grey;
+    border-radius: 5rem;
+    font-size: medium;
+}
+
+
+
+

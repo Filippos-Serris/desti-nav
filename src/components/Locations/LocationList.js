@@ -2,9 +2,9 @@ import Location from "./Location";
 const LocationList = (props) => {
   return (
     <ul>
-      <li key={props.location.address}>
-        <Location location={props.location} />
-      </li>
+      {props.addresses.map((data) => (
+        <Location key={data.address} address={data} />
+      ))}
     </ul>
   );
 };

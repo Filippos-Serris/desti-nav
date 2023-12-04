@@ -1,9 +1,10 @@
 import { Fragment } from "react";
+import logoImage from "../assets/destinav.png";
 const Header = () => {
   return (
-    <Fragment>
-      <h1>Header</h1>
-    </Fragment>
+    <div>
+      <img src={logoImage} />
+    </div>
   );
 };
 
