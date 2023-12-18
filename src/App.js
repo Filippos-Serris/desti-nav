@@ -5,6 +5,8 @@ import Locations from "./components/Locations/Locations.js";
 import LocationContext from "./store/location-context.js";
 import RadiusSearch from "./components/RadiusSearch/RadiusSearch.js";
 import Weather from "./components/Weather.js";
+import Currency from "./components/Currency.js";
+import Footer from "./components/UI/Footer.js";
 
 function App() {
   const [searchesActivated, setSearchesActivated] = useState(false);
@@ -33,25 +35,50 @@ function App() {
     "fast_food%2Cfood_courts%2Cpicnic_site%2Crestaurants%2Cbakeries";
   const drinks = "bars%2Cpubs";
   const coffee = "cafes";
+  const activities = "amusements";
 
   return (
     <Fragment>
-      <Header />
+      <Header menuOn={searchesActivated} />
 
       <LocationContext.Provider value={ctxValue}>
         <Locations locationSet={handleSearchesActivation} />
 
         {searchesActivated && (
           <Fragment>
-            <RadiusSearch title={"Landmarks"} pointsOfInterest={landmarks} />
-            <RadiusSearch title={"Restaurants"} pointsOfInterest={foods} />
-            <RadiusSearch title={"Drinks"} pointsOfInterest={drinks} />
-            <RadiusSearch title={"Coffee"} pointsOfInterest={coffee} />
+            <RadiusSearch
+              id="landmarks"
+              title={"Landmarks"}
+              pointsOfInterest={landmarks}
+            />
+            <RadiusSearch
+              id="dining"
+              title={"Dining"}
+              pointsOfInterest={foods}
+            />
+            <RadiusSearch
+              id="drinks"
+              title={"Drinks"}
+              pointsOfInterest={drinks}
+            />
+            <RadiusSearch
+              id="coffee"
+              title={"Coffee"}
+              pointsOfInterest={coffee}
+            />
+            <RadiusSearch
+              id="activities"
+              title={"Activities"}
+              pointsOfInterest={activities}
+            />
 
-            <Weather />
+            <Weather id="weather" />
+            <Currency />
           </Fragment>
         )}
       </LocationContext.Provider>
+
+      <Footer></Footer>
     </Fragment>
   );
 }

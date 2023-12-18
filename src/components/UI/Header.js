@@ -1,31 +1,35 @@
 import "./Header.css";
 
-const Header = () => {
+import { Link } from "react-scroll";
+
+const Header = (props) => {
   return (
     <div className="navigation">
       <h2>DestiNav</h2>
-      <nav>
-        <ul>
-          <li>
-            <a>Landmarks</a>
-          </li>
-          <li>
-            <a>Dining</a>
-          </li>
-          <li>
-            <a>Coffee</a>
-          </li>
-          <li>
-            <a>Drinks</a>
-          </li>
-          <li>
-            <a>Weather</a>
-          </li>
-          <li>
-            <a>Currency</a>
-          </li>
-        </ul>
-      </nav>
+      {props.menuOn && (
+        <nav>
+          <ul>
+            <li>
+              <Link to="landmarks">Landmarks</Link>
+            </li>
+            <li>
+              <Link to="dining">Dining</Link>
+            </li>
+            <li>
+              <Link to="coffee">Coffee</Link>
+            </li>
+            <li>
+              <Link to="drinks">Drinks</Link>
+            </li>
+            <li>
+              <Link to="weather">Weather</Link>
+            </li>
+            <li>
+              <Link to="currency">Currency</Link>
+            </li>
+          </ul>
+        </nav>
+      )}
     </div>
   );
 };

@@ -1,9 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const RadiusSearchForm = (props) => {
   const radius = useRef();
   const limit = useRef();
-  const rate = useRef();
+  const rate = useRef("1");
 
   const handleRateChange = (event) => {
     rate.current = event.target.value;
@@ -12,9 +12,9 @@ const RadiusSearchForm = (props) => {
   const searchHandler = (event) => {
     event.preventDefault();
 
-    const enteredRadius = radius.current.value;
-    const enteredLimit = limit.current.value;
-    const enteredRate = rate.current;
+    let enteredRadius = radius.current.value;
+    let enteredLimit = limit.current.value;
+    let enteredRate = rate.current;
 
     console.log(
       `Radius:${enteredRadius}, Limit:${enteredLimit}, Rate:${enteredRate}`
@@ -31,7 +31,7 @@ const RadiusSearchForm = (props) => {
     <form onSubmit={searchHandler}>
       <div>
         <label htmlFor="radius">Radius</label>
-        <input id="radius" type="number" ref={radius}></input>
+        <input id="radius" type="number" ref={radius} min={1}></input>
       </div>
 
       <div>
@@ -41,13 +41,15 @@ const RadiusSearchForm = (props) => {
           type="number"
           placeholder="1-1000"
           ref={limit}
+          min={1}
+          max={1000}
         ></input>
       </div>
 
       <div>
         <label htmlFor="rate">Rate</label>
         <select id="rate" onChange={handleRateChange}>
-          <option>---</option>
+          <option value="---">---</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>

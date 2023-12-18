@@ -60,7 +60,7 @@ const RadiusSearch = (props) => {
 
   return (
     <Card>
-      <h2>{props.title}</h2>
+      <h2 id={props.id}>{props.title}</h2>
       <RadiusSearchForm onSearch={paramsHandler} />
       <ObjectList objects={apiResponse} />
     </Card>

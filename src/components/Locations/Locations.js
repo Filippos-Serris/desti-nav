@@ -12,8 +12,10 @@ const Locations = (props) => {
   const [address, setAddress] = useState();
   const [geoResponse, setGeoResponse] = useState([]);
   const [firstLoad, setFirstLoad] = useState(true);
+  const [showList, setShowList] = useState(false);
 
   const addressHandler = (address) => {
+    setShowList(true);
     setFirstLoad(false);
     setAddress(address);
   };
@@ -33,7 +35,7 @@ const Locations = (props) => {
         //console.log(resData);
         resData.results.map((data) =>
           console.log(
-            `Address:${data.formatted} Lat:${data.geometry.lat}, Lng:${data.geometry.lng}`
+            `Address:${data.formatted} Lat:${data.geometry.lat}, Lng:${data.geometry.lng}, Flag: ${data.annotations.flag}`
           )
         );
 
@@ -43,6 +45,7 @@ const Locations = (props) => {
             address: data.formatted,
             lat: data.geometry.lat,
             lng: data.geometry.lng,
+            flag: data.annotations.flag,
           })
         );
         setGeoResponse(returnedLocations);
@@ -57,10 +60,12 @@ const Locations = (props) => {
   return (
     <Fragment>
       <div className="form-container">
-        <h2>Discover your next Destination with DestiNav</h2>
+        <h2>Discover your next destination with DestiNav</h2>
         <LocationForm onAddress={addressHandler} />
       </div>
-      <LocationList locationSet={props.locationSet} addresses={geoResponse} />
+      {showList && (
+        <LocationList locationSet={props.locationSet} addresses={geoResponse} />
+      )}
     </Fragment>
   );
 };

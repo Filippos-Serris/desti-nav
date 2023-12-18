@@ -1,0 +1,22 @@
+.location-container {
+    margin: 1rem 0;
+    border: solid thin white;
+}
+
+.location {
+    background-color: transparent;
+}
+
+button {
+    border: solid thin grey;
+    border-radius: 5rem;
+}
+
+.flag {
+    font-size: xx-large;
+    margin: 0;
+}
+
+li p {
+    margin: 0;
+}

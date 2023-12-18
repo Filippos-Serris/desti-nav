@@ -3,7 +3,7 @@ import { useEffect, useContext, useState, useRef } from "react";
 import LocationContext from "../store/location-context";
 import Card from "./UI/Card";
 
-const Weather = () => {
+const Weather = (props) => {
   const [firstCall, setFirstCall] = useState(true);
   const ctxLocation = useContext(LocationContext);
   const [dates, setDates] = useState({
@@ -52,7 +52,7 @@ const Weather = () => {
 
   return (
     <Card>
-      <h2>Weather Section</h2>
+      <h2 id={props.id}>Weather Section</h2>
       <form onSubmit={searchHandler}>
         <div>
           <label>Start Date</label>
