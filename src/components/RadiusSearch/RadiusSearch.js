@@ -1,4 +1,6 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, Fragment } from "react";
+
+import "./RadiusSearch.css";
 
 import RadiusSearchForm from "./RadiusSearchForm";
 import ObjectList from "./ObjectList";
@@ -59,11 +61,19 @@ const RadiusSearch = (props) => {
   };
 
   return (
-    <Card>
-      <h2 id={props.id}>{props.title}</h2>
-      <RadiusSearchForm onSearch={paramsHandler} />
+    <Fragment>
+      <div
+        className="search-container"
+        style={{ backgroundImage: `url(${props.background})` }}
+      >
+        <h2 id={props.id}>{props.title}</h2>
+        <div className="search-form">
+          <p>{props.quote}</p>
+          <RadiusSearchForm onSearch={paramsHandler} />
+        </div>
+      </div>
       <ObjectList objects={apiResponse} />
-    </Card>
+    </Fragment>
   );
 };
 

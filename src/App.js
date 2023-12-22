@@ -8,6 +8,13 @@ import Weather from "./components/Weather.js";
 import Currency from "./components/Currency.js";
 import Footer from "./components/UI/Footer.js";
 
+import background from "./assets/background.jpg";
+import LandmarksBackground from "./assets/landmarks.jpg";
+import DiningBackground from "./assets/dining.jpg";
+import CoffeeBackground from "./assets/coffee.jpg";
+import DrinksBackground from "./assets/drinking.jpg";
+import ActivitiesBackground from "./assets/activities.jpg";
+
 function App() {
   const [searchesActivated, setSearchesActivated] = useState(false);
 
@@ -37,48 +44,80 @@ function App() {
   const coffee = "cafes";
   const activities = "amusements";
 
+  const backgroundDivStyle = {
+    position: "fixed",
+    backgroundSize: "cover",
+    top: "0",
+    left: "0",
+    width: "100vw",
+    height: "100vh",
+    backgroundImage: `url(${background})`,
+    zIndex: "-1",
+    filter: "blur(8px)",
+  };
+
+  /*const divStyle = {
+    backgroundImage: 'url("./assets/locations.jpg")',
+    backgroundSize: "cover",
+    height: "100vh",
+  };*/
+
   return (
     <Fragment>
       <Header menuOn={searchesActivated} />
+      <div className="backgroundDivStyle">
+        <LocationContext.Provider value={ctxValue}>
+          <Locations locationSet={handleSearchesActivation} />
 
-      <LocationContext.Provider value={ctxValue}>
-        <Locations locationSet={handleSearchesActivation} />
+          {searchesActivated && (
+            <Fragment>
+              <RadiusSearch
+                id="landmarks"
+                background={LandmarksBackground}
+                title={"Landmarks"}
+                quote={"Grab your camera and go"}
+                pointsOfInterest={landmarks}
+              />
+              <RadiusSearch
+                id="dining"
+                background={DiningBackground}
+                title={"Dining"}
+                quote={"Hungry for a good time? Join the table!"}
+                pointsOfInterest={foods}
+              />
+              <RadiusSearch
+                id="drinks"
+                background={DrinksBackground}
+                title={"Drinks"}
+                quote={
+                  "Cocktail o'clock: Where the hours are short and the drinks are tall"
+                }
+                pointsOfInterest={drinks}
+              />
+              <RadiusSearch
+                id="coffee"
+                background={CoffeeBackground}
+                title={"Coffee"}
+                quote={"Coffee: because Mondays happen every week"}
+                pointsOfInterest={coffee}
+              />
+              <RadiusSearch
+                id="activities"
+                background={ActivitiesBackground}
+                title={"Activities"}
+                quote={"Let the adventure begin!"}
+                pointsOfInterest={activities}
+              />
 
-        {searchesActivated && (
-          <Fragment>
-            <RadiusSearch
-              id="landmarks"
-              title={"Landmarks"}
-              pointsOfInterest={landmarks}
-            />
-            <RadiusSearch
-              id="dining"
-              title={"Dining"}
-              pointsOfInterest={foods}
-            />
-            <RadiusSearch
-              id="drinks"
-              title={"Drinks"}
-              pointsOfInterest={drinks}
-            />
-            <RadiusSearch
-              id="coffee"
-              title={"Coffee"}
-              pointsOfInterest={coffee}
-            />
-            <RadiusSearch
-              id="activities"
-              title={"Activities"}
-              pointsOfInterest={activities}
-            />
-
-            <Weather id="weather" />
-            <Currency />
-          </Fragment>
-        )}
-      </LocationContext.Provider>
+              <Weather id="weather" />
+              <Currency id="currency" />
+            </Fragment>
+          )}
+        </LocationContext.Provider>
+      </div>
 
       <Footer></Footer>
+      <div style={backgroundDivStyle}></div>
     </Fragment>
   );
 }

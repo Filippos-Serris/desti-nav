@@ -1,5 +1,5 @@
-const Currency = () => {
-  return <h2>Currency</h2>;
+const Currency = (props) => {
+  return <h2 id={props.id}>Currency</h2>;
 };
 
 export default Currency;

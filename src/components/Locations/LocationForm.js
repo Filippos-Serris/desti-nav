@@ -37,8 +37,8 @@ const LocationForm = (props) => {
 
   return (
     <Fragment>
-      <form className="form" onSubmit={searchHandler}>
-        <div className="inputs">
+      <form className="location-form" onSubmit={searchHandler}>
+        <div className="location-inputs">
           <label htmlFor="street">*Street</label>
           <input
             id="street"
@@ -49,7 +49,7 @@ const LocationForm = (props) => {
           ></input>
         </div>
 
-        <div className="inputs">
+        <div className="location-inputs">
           <label htmlFor="number">St. number</label>
           <input
             id="number"
@@ -59,7 +59,7 @@ const LocationForm = (props) => {
           ></input>
         </div>
 
-        <div className="inputs">
+        <div className="location-inputs">
           <label htmlFor="city">City</label>
           <input
             id="city"
@@ -69,7 +69,7 @@ const LocationForm = (props) => {
           ></input>
         </div>
 
-        <div className="inputs">
+        <div className="location-inputs">
           <label htmlFor="postal">Postal</label>
           <input
             id="postal"
@@ -79,7 +79,7 @@ const LocationForm = (props) => {
           ></input>
         </div>
 
-        <div className="inputs">
+        <div className="location-inputs">
           <label htmlFor="country">*Country</label>
           <input
             id="country"

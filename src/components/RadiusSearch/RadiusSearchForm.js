@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 
+import "./RadiusSearchForm.css";
+
 const RadiusSearchForm = (props) => {
   const radius = useRef();
   const limit = useRef();
@@ -28,13 +30,19 @@ const RadiusSearchForm = (props) => {
   };
 
   return (
-    <form onSubmit={searchHandler}>
-      <div>
+    <form className="form" onSubmit={searchHandler}>
+      <div className="inputs">
         <label htmlFor="radius">Radius</label>
-        <input id="radius" type="number" ref={radius} min={1}></input>
+        <input
+          id="radius"
+          type="number"
+          placeholder="1-10000"
+          ref={radius}
+          min={1}
+        ></input>
       </div>
 
-      <div>
+      <div className="inputs">
         <label htmlFor="limit">Number of results</label>
         <input
           id="limit"
@@ -46,7 +54,7 @@ const RadiusSearchForm = (props) => {
         ></input>
       </div>
 
-      <div>
+      <div className="inputs">
         <label htmlFor="rate">Rate</label>
         <select id="rate" onChange={handleRateChange}>
           <option value="---">---</option>
@@ -56,7 +64,7 @@ const RadiusSearchForm = (props) => {
         </select>
       </div>
 
-      <button>Search</button>
+      <button />
     </form>
   );
 };

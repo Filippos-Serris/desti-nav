@@ -14,15 +14,13 @@ const Location = (props) => {
 
   return (
     <div className="location-container">
-      <li className="location">
-        <p>{props.address.address}</p>
-        <p className="flag">{props.address.flag}</p>
-        <button
-          onClick={locationHandler}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Select
-        </button>
+      <li>
+        <div className="location">
+          <p className="address">{props.address.address}</p>
+          <p className="flag">{props.address.flag}</p>
+        </div>
+
+        <button onClick={locationHandler}>Select</button>
       </li>
     </div>
   );

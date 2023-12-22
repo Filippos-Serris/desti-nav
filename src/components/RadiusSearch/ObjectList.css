@@ -1,5 +1,11 @@
 .object-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    display: grid;
+    grid-template-rows: 10rem;
+    grid-auto-rows: 10rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: transparent;
+    border: solid thin black;
+    margin: 1rem;
+    border-radius: 1rem;
+    gap: 2rem;
 }
