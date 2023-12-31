@@ -1,7 +1,10 @@
 import { useEffect, useContext, useState, useRef } from "react";
 
-import LocationContext from "../store/location-context";
-import Card from "./UI/Card";
+import "./Weather.css";
+
+import LocationContext from "../../store/location-context";
+import Card from "../UI/Card";
+import WeatherForm from "./WeatherForm";
 
 const Weather = (props) => {
   const [firstCall, setFirstCall] = useState(true);
@@ -26,10 +29,10 @@ const Weather = (props) => {
 
     async function fetchWeather() {
       const res = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${ctxLocation.lat}&longitude=${ctxLocation.lng}1&current=temperature_2m,relative_humidity_2m&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,visibility&daily=temperature_2m_max,temperature_2m_min&start_date=${dates.startDate}&end_date=2023-12-03`
+        `https://api.open-meteo.com/v1/forecast?latitude=${ctxLocation.lat}&longitude=${ctxLocation.lng}1&current=temperature_2m,relative_humidity_2m&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,visibility&daily=temperature_2m_max,temperature_2m_min&start_date=${dates.startDate}&end_date=${dates.endDate}`
       );
       const resData = await res.json();
-      console.log(resData);
+      //console.log(resData);
     }
     fetchWeather();
   }, [dates]);
@@ -44,33 +47,19 @@ const Weather = (props) => {
 
     setFirstCall(false);
     setDates({ startDate: startDate, endDate: endDate });
-
-    console.log(
-      `State start date"${dates.startDate}, State end date:${dates.endDate}`
-    );
   };
 
   return (
     <Card>
       <h2 id={props.id}>Weather Section</h2>
-      <form onSubmit={searchHandler}>
-        <div>
-          <label>Start Date</label>
-          <input placeholder="1-31" ref={startDay} type="number"></input>
-          <input placeholder="1-12" ref={startMonth} type="number"></input>
-          <input placeholder="1940-now" ref={startYear} type="number"></input>
-        </div>
 
-        <div>
-          <label>End Date</label>
-          <input placeholder="1-31" ref={endDay} type="number"></input>
-          <input placeholder="1-12" ref={endMonth} type="number"></input>
-          <input placeholder="1940-now" ref={endYear} type="number"></input>
-        </div>
+      <form onSubmit={searchHandler}>
+        <WeatherForm title="Start date"></WeatherForm>
+        <WeatherForm title="End date"></WeatherForm>
 
         <button>Search</button>
       </form>
-      <p>from 08-06-2022 until 19-12-2023</p>
+      <p>Range for the dates 6 months prior to </p>
     </Card>
   );
 };

@@ -21,6 +21,7 @@
     width: fit-content;
 }
 
+
 .inputs label {
     margin: 0;
     padding: 0;
@@ -31,13 +32,24 @@
 .inputs input {
     margin: 0;
     padding: 0;
-    width: 10rem;
     text-decoration: underline;
     font-size: large;
     border: none;
     outline: none;
     background-color: white;
     width: fit-content;
+}
+
+.inputs .false-input {
+    margin: 0;
+    padding: 0.2rem;
+    text-decoration: underline;
+    font-size: large;
+    outline: none;
+    background-color: white;
+    width: fit-content;
+    border: solid thin red;
+    border-radius: 1rem;
 }
 
 .form button {

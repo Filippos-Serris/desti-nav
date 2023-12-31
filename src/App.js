@@ -1,19 +1,19 @@
 import { Fragment, useState } from "react";
 
-import Header from "./components/UI/Header.js";
-import Locations from "./components/Locations/Locations.js";
-import LocationContext from "./store/location-context.js";
-import RadiusSearch from "./components/RadiusSearch/RadiusSearch.js";
-import Weather from "./components/Weather.js";
-import Currency from "./components/Currency.js";
-import Footer from "./components/UI/Footer.js";
-
 import background from "./assets/background.jpg";
 import LandmarksBackground from "./assets/landmarks.jpg";
 import DiningBackground from "./assets/dining.jpg";
 import CoffeeBackground from "./assets/coffee.jpg";
 import DrinksBackground from "./assets/drinking.jpg";
 import ActivitiesBackground from "./assets/activities.jpg";
+
+import Header from "./components/UI/Header.js";
+import Locations from "./components/Locations/Locations.js";
+import LocationContext from "./store/location-context.js";
+import RadiusSearch from "./components/RadiusSearch/RadiusSearch.js";
+import Weather from "./components/Weather/Weather.js";
+import Currency from "./components/Currency.js";
+import Footer from "./components/UI/Footer.js";
 
 function App() {
   const [searchesActivated, setSearchesActivated] = useState(false);
@@ -55,12 +55,6 @@ function App() {
     zIndex: "-1",
     filter: "blur(8px)",
   };
-
-  /*const divStyle = {
-    backgroundImage: 'url("./assets/locations.jpg")',
-    backgroundSize: "cover",
-    height: "100vh",
-  };*/
 
   return (
     <Fragment>

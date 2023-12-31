@@ -2,19 +2,28 @@ import { useEffect, useState } from "react";
 
 import "./Object.css";
 
-import Card from "../UI/Card";
+import ObjectModal from "../UI/ObjectModal";
 
 const API_KEY = "5ae2e3f221c38a28845f05b6489e6f49a73600131a4aece3c12d2d07";
 
 const Object = (props) => {
-  const [search, setSearch] = useState(false);
   const [firstLoad, setFirstLoad] = useState(true);
-
-  const gridRow = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+  const [search, setSearch] = useState(false);
+  const [returnedInformation, setReturnedInformation] = useState({});
   const gridColum = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
 
+  const searchHandler = (event) => {
+    event.preventDefault();
+    setFirstLoad(false);
+    setSearch(true);
+  };
+
+  const closeObject = () => {
+    setSearch(false);
+  };
+
   useEffect(() => {
-    if (!search) {
+    if (firstLoad) {
       return;
     }
 
@@ -23,15 +32,19 @@ const Object = (props) => {
         `https://api.opentripmap.com/0.1/en/places/xid/${props.object.id}?apikey=${API_KEY}`
       );
       const resData = await res.json();
-      console.log(resData);
+      //console.log(resData);
+
+      setReturnedInformation({
+        name: resData.name,
+        address: `${resData.address.road},${resData.address.neighbourhood}`,
+        kinds: resData.kinds,
+        rate: resData.rate,
+        url: resData.otm,
+      });
+      //console.log(returnedInformation);
     }
     fetchDetails();
-  }, [search]);
-
-  const searchHandler = (event) => {
-    event.preventDefault();
-    setSearch(true);
-  };
+  }, [firstLoad]);
 
   return (
     <div
@@ -40,13 +53,17 @@ const Object = (props) => {
     >
       <li>
         <h2>{props.object.name}</h2>
-        <p>
-          Distance: {props.object.distance} Lat:{props.object.lat} Long:
-          {props.object.lng}
-        </p>
-        <h3>Information about the place</h3>
-        <button onClick={searchHandler}>Search</button>
+        <div>
+          <p>Tell me more</p>
+          <button onClick={searchHandler} />
+        </div>
       </li>
+      {search && (
+        <ObjectModal
+          object={{ ...returnedInformation, distance: props.object.distance }}
+          closeObject={closeObject}
+        />
+      )}
     </div>
   );
 };

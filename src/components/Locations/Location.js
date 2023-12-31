@@ -1,8 +1,8 @@
+import { useContext } from "react";
+
 import "./Location.css";
 
-import { useContext } from "react";
 import LocationContext from "../../store/location-context";
-import Card from "../UI/Card";
 
 const Location = (props) => {
   const locationCtx = useContext(LocationContext);

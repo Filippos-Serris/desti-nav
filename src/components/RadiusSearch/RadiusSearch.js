@@ -5,13 +5,13 @@ import "./RadiusSearch.css";
 import RadiusSearchForm from "./RadiusSearchForm";
 import ObjectList from "./ObjectList";
 import LocationContext from "../../store/location-context";
-import Card from "../UI/Card";
 
 const API_KEY = "5ae2e3f221c38a28845f05b6489e6f49a73600131a4aece3c12d2d07";
 
 const RadiusSearch = (props) => {
   const [apiResponse, setApiResponse] = useState([]);
   const [firstLoad, setFirstLoad] = useState(true);
+  const [objectLIstActive, setObjectListActive] = useState(false);
   const [params, setParams] = useState({});
 
   const ctxLocation = useContext(LocationContext);
@@ -27,7 +27,7 @@ const RadiusSearch = (props) => {
           `https://api.opentripmap.com/0.1/en/places/radius?radius=${params.radius}&lon=${ctxLocation.lng}&lat=${ctxLocation.lat}&kinds=${props.pointsOfInterest}&rate=${params.rate}&format=json&limit=${params.limit}&apikey=${API_KEY}`
         );
         const resData = await res.json();
-        console.log(resData);
+        //console.log(resData);
 
         const returnedObjects = [];
 
@@ -43,6 +43,7 @@ const RadiusSearch = (props) => {
           );
         }
         setApiResponse(returnedObjects);
+        setObjectListActive(true);
       } catch (error) {
         console.log(error);
       }
@@ -72,7 +73,7 @@ const RadiusSearch = (props) => {
           <RadiusSearchForm onSearch={paramsHandler} />
         </div>
       </div>
-      <ObjectList objects={apiResponse} />
+      {objectLIstActive && <ObjectList objects={apiResponse} />}
     </Fragment>
   );
 };

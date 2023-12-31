@@ -32,12 +32,12 @@ const Locations = (props) => {
         );
         const resData = await res.json();
 
-        //console.log(resData);
+        /*console.log(resData);
         resData.results.map((data) =>
           console.log(
             `Address:${data.formatted} Lat:${data.geometry.lat}, Lng:${data.geometry.lng}, Flag: ${data.annotations.flag}`
           )
-        );
+        );*/
 
         const returnedLocations = [];
         resData.results.map((data) =>
