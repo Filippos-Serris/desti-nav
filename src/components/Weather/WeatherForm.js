@@ -1,46 +1,39 @@
-import { useRef } from "react";
+import { useState } from "react";
 
 import "./WeatherForm.css";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 const WeatherForm = (props) => {
-  const startDay = useRef();
-  const startMonth = useRef();
-  const startYear = useRef();
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const dateFormatter = (date) => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Adding 1 because getMonth() returns 0-based month
+    const day = date.getDate().toString().padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    //console.log(date);
+
+    const formattedDate = dateFormatter(date);
+
+    props.setter(props.title, formattedDate);
+  };
 
   return (
-    <form>
-      <div className="dates">
-        <p>{props.title}</p>
-        <div>
-          <label htmlFor="year">Year</label>
-          <input
-            id="year"
-            placeholder="1940-now"
-            ref={startYear}
-            type="number"
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="month">Month</label>
-          <input
-            id="month"
-            placeholder="1-12"
-            ref={startMonth}
-            type="number"
-          ></input>
-        </div>
-
-        <div>
-          <label htmlFor="day">Day</label>
-          <input
-            id="day"
-            placeholder="1-31"
-            ref={startDay}
-            type="number"
-          ></input>
-        </div>
-      </div>
-    </form>
+    <div className="date">
+      <p>{props.title}</p>
+      <DatePicker
+        selected={selectedDate}
+        onChange={handleDateChange}
+        dateFormat="yyyy/MM/dd"
+      ></DatePicker>
+    </div>
   );
 };
 

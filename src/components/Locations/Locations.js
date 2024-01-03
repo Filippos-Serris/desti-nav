@@ -14,8 +14,10 @@ const Locations = (props) => {
   const [firstLoad, setFirstLoad] = useState(true);
   const [showList, setShowList] = useState(false);
 
+  const [showError, setShowError] = useState(false);
+  const [error, setError] = useState(false);
+
   const addressHandler = (address) => {
-    setShowList(true);
     setFirstLoad(false);
     setAddress(address);
   };
@@ -32,13 +34,6 @@ const Locations = (props) => {
         );
         const resData = await res.json();
 
-        /*console.log(resData);
-        resData.results.map((data) =>
-          console.log(
-            `Address:${data.formatted} Lat:${data.geometry.lat}, Lng:${data.geometry.lng}, Flag: ${data.annotations.flag}`
-          )
-        );*/
-
         const returnedLocations = [];
         resData.results.map((data) =>
           returnedLocations.push({
@@ -48,9 +43,12 @@ const Locations = (props) => {
             flag: data.annotations.flag,
           })
         );
+        setShowList(true);
         setGeoResponse(returnedLocations);
-        //console.log(geoResponse);
+        console.log(geoResponse);
       } catch (error) {
+        setError(error);
+        setShowError(true);
         console.log(error);
       }
     }
@@ -66,6 +64,7 @@ const Locations = (props) => {
       {showList && (
         <LocationList locationSet={props.locationSet} addresses={geoResponse} />
       )}
+      {showError && <p>FUCK</p>}
     </Fragment>
   );
 };

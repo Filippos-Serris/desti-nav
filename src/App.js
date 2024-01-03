@@ -103,14 +103,14 @@ function App() {
                 pointsOfInterest={activities}
               />
 
-              <Weather id="weather" />
-              <Currency id="currency" />
+              <Weather />
+              <Currency />
             </Fragment>
           )}
         </LocationContext.Provider>
       </div>
 
-      <Footer></Footer>
+      <Footer />
       <div style={backgroundDivStyle}></div>
     </Fragment>
   );

@@ -87,7 +87,7 @@ const LocationForm = (props) => {
             type="text"
             ref={countryRef}
             placeholder="US State"
-            className={formInputValidity.street ? null : "false-input"}
+            className={formInputValidity.country ? null : "false-input"}
           ></input>
         </div>
         <button></button>
