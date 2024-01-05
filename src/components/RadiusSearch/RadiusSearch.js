@@ -5,6 +5,7 @@ import "./RadiusSearch.css";
 import RadiusSearchForm from "./RadiusSearchForm";
 import ObjectList from "./ObjectList";
 import LocationContext from "../../store/location-context";
+import Searching from "../UI/Searching";
 
 const API_KEY = "5ae2e3f221c38a28845f05b6489e6f49a73600131a4aece3c12d2d07";
 
@@ -14,12 +15,12 @@ const RadiusSearch = (props) => {
 
   const [firstLoad, setFirstLoad] = useState(true);
   const [objectLIstActive, setObjectListActive] = useState(false);
+  const [searching, setSearching] = useState(false);
 
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
 
   const ctxLocation = useContext(LocationContext);
-  console.log(`id:${props.id} lat: ${ctxLocation.lat}`);
 
   const paramsHandler = (params) => {
     setFirstLoad(false);
@@ -37,6 +38,8 @@ const RadiusSearch = (props) => {
     }
     async function fetchObjects() {
       try {
+        setSearching(true);
+
         const res = await fetch(
           `https://api.opentripmap.com/0.1/en/places/radius?radius=${params.radius}&lon=${ctxLocation.lng}&lat=${ctxLocation.lat}&kinds=${props.pointsOfInterest}&rate=${params.rate}&format=json&limit=${params.limit}&apikey=${API_KEY}`
         );
@@ -57,9 +60,10 @@ const RadiusSearch = (props) => {
           );
         }
 
+        setSearching(false);
+        setObjectListActive(true);
         setApiResponse(returnedObjects);
         setError(false);
-        setObjectListActive(true);
       } catch (error) {
         setError(true);
         setErrorMessage(error.message);
@@ -83,6 +87,7 @@ const RadiusSearch = (props) => {
           />
         </div>
       </div>
+      {searching && <Searching />}
       {error && <p>{errorMessage}</p>}
       {objectLIstActive && <ObjectList objects={apiResponse} />}
     </Fragment>

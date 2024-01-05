@@ -5,6 +5,7 @@ import "./Locations.css";
 
 import LocationForm from "./LocationForm";
 import LocationList from "./LocationList";
+import Searching from "../UI/Searching";
 
 const GEOCODING_API_KEY = "845ebdcc2d794f9785f968141732d5d9";
 
@@ -14,6 +15,7 @@ const Locations = (props) => {
 
   const [firstLoad, setFirstLoad] = useState(true);
   const [showList, setShowList] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const addressHandler = (address) => {
     setFirstLoad(false);
@@ -27,6 +29,8 @@ const Locations = (props) => {
 
     async function fetchLocation() {
       try {
+        setLoading(true);
+
         const res = await fetch(
           `https://api.opencagedata.com/geocode/v1/json?q=${address}&key=${GEOCODING_API_KEY}`
         );
@@ -45,7 +49,7 @@ const Locations = (props) => {
         if (returnedLocations.length > 0) {
           setShowList(true);
         }
-
+        setLoading(false);
         setGeoResponse(returnedLocations);
         //console.log(geoResponse);
       } catch (error) {
@@ -61,6 +65,7 @@ const Locations = (props) => {
         <h2>Discover your next destination with DestiNav</h2>
         <LocationForm onAddress={addressHandler} />
       </div>
+      {loading && <Searching />}
       {showList && <LocationList addresses={geoResponse} />}
     </Fragment>
   );
