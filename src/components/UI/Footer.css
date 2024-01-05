@@ -1,1 +1,17 @@
-.footer {}
+.footer {
+    margin-bottom: 0;
+    background-color: #ffaa7f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+
+}
+
+.footer h2 {
+    margin-bottom: 0;
+    font-size: small;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.5rem 0.5rem 0.5rem #000;
+}

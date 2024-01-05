@@ -1,8 +1,12 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 
 import "./RadiusSearchForm.css";
 
+import LocationContext from "../../store/location-context";
+
 const RadiusSearchForm = (props) => {
+  const locationCtx = useContext(LocationContext);
+
   const [validForm, setValidForm] = useState({
     validRadius: true,
     validLimit: true,
@@ -42,7 +46,12 @@ const RadiusSearchForm = (props) => {
 
     formValidity(enteredRadius, enteredLimit);
 
-    if (!isEmpty(enteredRadius) && !isEmpty(enteredLimit)) {
+    if (
+      !isEmpty(enteredRadius) &&
+      !isEmpty(enteredLimit) &&
+      locationCtx.lat !== null &&
+      locationCtx.lng !== null
+    ) {
       props.onSearch({
         radius: enteredRadius,
         limit: enteredLimit,
@@ -91,7 +100,7 @@ const RadiusSearchForm = (props) => {
         </select>
       </div>
 
-      <button />
+      <button disabled={props.buttonActive} />
     </form>
   );
 };

@@ -11,11 +11,9 @@ const GEOCODING_API_KEY = "845ebdcc2d794f9785f968141732d5d9";
 const Locations = (props) => {
   const [address, setAddress] = useState();
   const [geoResponse, setGeoResponse] = useState([]);
+
   const [firstLoad, setFirstLoad] = useState(true);
   const [showList, setShowList] = useState(false);
-
-  const [showError, setShowError] = useState(false);
-  const [error, setError] = useState(false);
 
   const addressHandler = (address) => {
     setFirstLoad(false);
@@ -43,12 +41,14 @@ const Locations = (props) => {
             flag: data.annotations.flag,
           })
         );
-        setShowList(true);
+
+        if (returnedLocations.length > 0) {
+          setShowList(true);
+        }
+
         setGeoResponse(returnedLocations);
-        console.log(geoResponse);
+        //console.log(geoResponse);
       } catch (error) {
-        setError(error);
-        setShowError(true);
         console.log(error);
       }
     }
@@ -61,10 +61,7 @@ const Locations = (props) => {
         <h2>Discover your next destination with DestiNav</h2>
         <LocationForm onAddress={addressHandler} />
       </div>
-      {showList && (
-        <LocationList locationSet={props.locationSet} addresses={geoResponse} />
-      )}
-      {showError && <p>FUCK</p>}
+      {showList && <LocationList addresses={geoResponse} />}
     </Fragment>
   );
 };

@@ -16,18 +16,12 @@ import Currency from "./components/Currency.js";
 import Footer from "./components/UI/Footer.js";
 
 function App() {
-  const [searchesActivated, setSearchesActivated] = useState(false);
-
-  const handleSearchesActivation = () => {
-    setSearchesActivated(true);
-  };
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const handleSelectedLocation = (selectedLocation) => {
     ctxValue.address = selectedLocation.address;
     ctxValue.lat = selectedLocation.lat;
     ctxValue.lng = selectedLocation.lng;
-
-    console.log(ctxValue);
   };
 
   const ctxValue = {
@@ -44,6 +38,45 @@ function App() {
   const coffee = "cafes";
   const activities = "amusements";
 
+  const radiusSearchSpecifications = [
+    {
+      id: "landmarks",
+      background: LandmarksBackground,
+      title: "Landmarks",
+      quote: "Grab your camera and go",
+      pointsOfInterest: landmarks,
+    },
+    {
+      id: "dining",
+      background: DiningBackground,
+      title: "Dining",
+      quote: "Hungry for a good time? Join the table!",
+      pointsOfInterest: foods,
+    },
+    {
+      id: "drinks",
+      background: DrinksBackground,
+      title: "Drinks",
+      quote:
+        "Cocktail o'clock: Where the hours are short and the drinks are tall",
+      pointsOfInterest: drinks,
+    },
+    {
+      id: "coffee",
+      background: CoffeeBackground,
+      title: "Coffee",
+      quote: "Coffee: because Mondays happen every week",
+      pointsOfInterest: coffee,
+    },
+    {
+      id: "activities",
+      background: ActivitiesBackground,
+      title: "Activities",
+      quote: "Let the adventure begin!",
+      pointsOfInterest: activities,
+    },
+  ];
+
   const backgroundDivStyle = {
     position: "fixed",
     backgroundSize: "cover",
@@ -58,55 +91,25 @@ function App() {
 
   return (
     <Fragment>
-      <Header menuOn={searchesActivated} />
+      <Header menuOn={true /*searchesActivated*/} />
       <div className="backgroundDivStyle">
         <LocationContext.Provider value={ctxValue}>
-          <Locations locationSet={handleSearchesActivation} />
+          <Locations />
 
-          {searchesActivated && (
-            <Fragment>
-              <RadiusSearch
-                id="landmarks"
-                background={LandmarksBackground}
-                title={"Landmarks"}
-                quote={"Grab your camera and go"}
-                pointsOfInterest={landmarks}
-              />
-              <RadiusSearch
-                id="dining"
-                background={DiningBackground}
-                title={"Dining"}
-                quote={"Hungry for a good time? Join the table!"}
-                pointsOfInterest={foods}
-              />
-              <RadiusSearch
-                id="drinks"
-                background={DrinksBackground}
-                title={"Drinks"}
-                quote={
-                  "Cocktail o'clock: Where the hours are short and the drinks are tall"
-                }
-                pointsOfInterest={drinks}
-              />
-              <RadiusSearch
-                id="coffee"
-                background={CoffeeBackground}
-                title={"Coffee"}
-                quote={"Coffee: because Mondays happen every week"}
-                pointsOfInterest={coffee}
-              />
-              <RadiusSearch
-                id="activities"
-                background={ActivitiesBackground}
-                title={"Activities"}
-                quote={"Let the adventure begin!"}
-                pointsOfInterest={activities}
-              />
+          {radiusSearchSpecifications.map((data) => (
+            <RadiusSearch
+              key={data.id}
+              id={data.id}
+              background={data.background}
+              title={data.title}
+              quote={data.quote}
+              pointsOfInterest={data.pointsOfInterest}
+              buttonActive={buttonDisabled}
+            />
+          ))}
 
-              <Weather />
-              <Currency />
-            </Fragment>
-          )}
+          <Weather id="weather" buttonActive={buttonDisabled} />
+          <Currency id="currency" />
         </LocationContext.Provider>
       </div>
 

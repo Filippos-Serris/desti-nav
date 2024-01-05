@@ -9,6 +9,7 @@ const LocationForm = (props) => {
     street: true,
     country: true,
   });
+
   const streetRef = useRef();
   const postalRef = useRef();
   const countryRef = useRef();
@@ -29,7 +30,7 @@ const LocationForm = (props) => {
       country: !isEmpty(enteredCountry),
     });
 
-    if (formInputValidity.street && formInputValidity.country) {
+    if (!isEmpty(enteredStreet) && !isEmpty(enteredCountry)) {
       props.onAddress(
         `${enteredStreet} ${enteredNum}, ${enteredCountry}, ${enteredCity}, ${enteredPostal}`
       );

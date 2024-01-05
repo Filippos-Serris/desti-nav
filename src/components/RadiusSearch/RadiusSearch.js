@@ -10,17 +10,31 @@ const API_KEY = "5ae2e3f221c38a28845f05b6489e6f49a73600131a4aece3c12d2d07";
 
 const RadiusSearch = (props) => {
   const [apiResponse, setApiResponse] = useState([]);
-  const [firstLoad, setFirstLoad] = useState(true);
-  const [objectLIstActive, setObjectListActive] = useState(false);
   const [params, setParams] = useState({});
 
+  const [firstLoad, setFirstLoad] = useState(true);
+  const [objectLIstActive, setObjectListActive] = useState(false);
+
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
+
   const ctxLocation = useContext(LocationContext);
+  console.log(`id:${props.id} lat: ${ctxLocation.lat}`);
+
+  const paramsHandler = (params) => {
+    setFirstLoad(false);
+    setParams({
+      id: params.id,
+      radius: params.radius,
+      limit: params.limit,
+      rate: params.rate,
+    });
+  };
 
   useEffect(() => {
     if (firstLoad) {
       return;
     }
-
     async function fetchObjects() {
       try {
         const res = await fetch(
@@ -42,24 +56,17 @@ const RadiusSearch = (props) => {
             })
           );
         }
+
         setApiResponse(returnedObjects);
+        setError(false);
         setObjectListActive(true);
       } catch (error) {
-        console.log(error);
+        setError(true);
+        setErrorMessage(error.message);
       }
     }
     fetchObjects();
   }, [params]);
-
-  const paramsHandler = (params) => {
-    setFirstLoad(false);
-    setParams({
-      id: params.id,
-      radius: params.radius,
-      limit: params.limit,
-      rate: params.rate,
-    });
-  };
 
   return (
     <Fragment>
@@ -70,9 +77,13 @@ const RadiusSearch = (props) => {
         <h2 id={props.id}>{props.title}</h2>
         <div className="search-form">
           <p>{props.quote}</p>
-          <RadiusSearchForm onSearch={paramsHandler} />
+          <RadiusSearchForm
+            onSearch={paramsHandler}
+            buttonActive={props.buttonActive}
+          />
         </div>
       </div>
+      {error && <p>{errorMessage}</p>}
       {objectLIstActive && <ObjectList objects={apiResponse} />}
     </Fragment>
   );

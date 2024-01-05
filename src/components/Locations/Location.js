@@ -8,7 +8,6 @@ const Location = (props) => {
   const locationCtx = useContext(LocationContext);
 
   const locationHandler = () => {
-    props.locationSet();
     locationCtx.setSelectedLocation(props.address);
   };
 
