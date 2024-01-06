@@ -10,6 +10,7 @@ import Searching from "../UI/Searching";
 const API_KEY = "5ae2e3f221c38a28845f05b6489e6f49a73600131a4aece3c12d2d07";
 
 const RadiusSearch = (props) => {
+  //const {id,background} = props
   const [apiResponse, setApiResponse] = useState([]);
   const [params, setParams] = useState({});
 
