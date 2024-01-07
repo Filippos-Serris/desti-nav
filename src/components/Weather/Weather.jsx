@@ -3,12 +3,11 @@ import { useEffect, useContext, useState } from "react";
 import "../../assets/stylesheets/Weather/Weather.css";
 
 import LocationContext from "../../store/location-context";
-import Card from "../UI/Card";
 import WeatherForm from "./WeatherForm";
 import WeatherResultsList from "./WeatherResultsList";
 
 const Weather = (props) => {
-  const {id} = props
+  const {id,buttonActive} = props
   const [apiResponse, setApiResponse] = useState([]);
   const [wrongDates, setWrongDates] = useState(false);
   const [weatherListActive, setWeatherListActive] = useState(false);
@@ -99,9 +98,9 @@ const Weather = (props) => {
   };
 
   return (
-    <Card>
-      <h2 id={id}>Weather Section</h2>
-      <p>
+    <div className="weather-form-container">
+      <h2 className="title" id={id}>Weather Section</h2>
+      <p className="instructions">
         Keep in mind that weather results range from 6 months prior to current
         date until 15 days ahead
       </p>
@@ -110,18 +109,18 @@ const Weather = (props) => {
         <WeatherForm title="From" setter={setDateRange}></WeatherForm>
         <WeatherForm title="to" setter={setDateRange}></WeatherForm>
 
-        <button>Search</button>
+        <button disabled={buttonActive} />
       </form>
       {weatherListActive && (
         <WeatherResultsList weatherConditions={apiResponse} />
       )}
       {wrongDates && (
-        <p>
+        <p className="error-message">
           Start and end dates are mandatory for results and must be in
           chronologically right order so check again.
         </p>
       )}
-    </Card>
+    </div>
   );
 };
 

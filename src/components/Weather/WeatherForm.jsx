@@ -30,6 +30,7 @@ const WeatherForm = (props) => {
     <div className="date">
       <p>{title}</p>
       <DatePicker
+      className="weather-form"
         selected={selectedDate}
         onChange={handleDateChange}
         dateFormat="yyyy/MM/dd"
