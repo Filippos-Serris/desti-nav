@@ -9,7 +9,7 @@ import Searching from "../UI/Searching";
 
 const GEOCODING_API_KEY = "845ebdcc2d794f9785f968141732d5d9";
 
-const Locations = (props) => {
+const Locations = () => {
   const [address, setAddress] = useState();
   const [geoResponse, setGeoResponse] = useState([]);
 

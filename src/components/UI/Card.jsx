@@ -1,6 +1,7 @@
 import "../../assets/stylesheets/UI/Card.css";
 const Card = (props) => {
-  return <div className="card">{props.children}</div>;
+  const {children} = props
+  return <div className="card">{children}</div>;
 };
 
 export default Card;
