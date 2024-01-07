@@ -3,10 +3,12 @@ import { Link } from "react-scroll";
 import "../../assets/stylesheets/UI/Header.css";
 
 const Header = (props) => {
+  const {menuOn} = props
+
   return (
     <div className="navigation">
       <h2>DestiNav</h2>
-      {props.menuOn && (
+      {menuOn && (
         <nav>
           <ul>
             <li>

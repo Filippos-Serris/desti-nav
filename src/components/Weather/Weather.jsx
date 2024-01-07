@@ -8,6 +8,7 @@ import WeatherForm from "./WeatherForm";
 import WeatherResultsList from "./WeatherResultsList";
 
 const Weather = (props) => {
+  const {id} = props
   const [apiResponse, setApiResponse] = useState([]);
   const [wrongDates, setWrongDates] = useState(false);
   const [weatherListActive, setWeatherListActive] = useState(false);
@@ -99,7 +100,7 @@ const Weather = (props) => {
 
   return (
     <Card>
-      <h2 id={props.id}>Weather Section</h2>
+      <h2 id={id}>Weather Section</h2>
       <p>
         Keep in mind that weather results range from 6 months prior to current
         date until 15 days ahead

@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const WeatherForm = (props) => {
+  const {title,setter}=props
   const [selectedDate, setSelectedDate] = useState(null);
 
   const dateFormatter = (date) => {
@@ -22,12 +23,12 @@ const WeatherForm = (props) => {
 
     const formattedDate = dateFormatter(date);
 
-    props.setter(props.title, formattedDate);
+    setter(props.title, formattedDate);
   };
 
   return (
     <div className="date">
-      <p>{props.title}</p>
+      <p>{title}</p>
       <DatePicker
         selected={selectedDate}
         onChange={handleDateChange}
