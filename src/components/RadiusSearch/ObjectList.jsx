@@ -6,9 +6,10 @@ import Object from "./Object";
 import Card from "../UI/Card";
 
 const ObjectList = (props) => {
+  const {objects} = props
   return (
     <Fragment>
-      {props.objects.length === 0 && (
+      {objects.length === 0 && (
         <Card>
           <p className="hints">
             No matches found. Try expanding the search radius or the rate
@@ -17,9 +18,9 @@ const ObjectList = (props) => {
         </Card>
       )}
 
-      {props.objects.length !== 0 && (
+      {objects.length !== 0 && (
         <ul className="object-list">
-          {props.objects.map((data) => (
+          {objects.map((data) => (
             <Object key={data.id} object={data} />
           ))}
         </ul>

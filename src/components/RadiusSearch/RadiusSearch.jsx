@@ -10,8 +10,8 @@ import Searching from "../UI/Searching";
 const API_KEY = "5ae2e3f221c38a28845f05b6489e6f49a73600131a4aece3c12d2d07";
 
 const RadiusSearch = (props) => {
-  //const {id,background} = props
-  const [apiResponse, setApiResponse] = useState([]);
+  const {id,background,title,quote,pointsOfInterest,buttonActive} = props
+  const [apiResponse, setApiResponse] = useState([])
   const [params, setParams] = useState({});
 
   const [firstLoad, setFirstLoad] = useState(true);
@@ -42,7 +42,7 @@ const RadiusSearch = (props) => {
         setSearching(true);
 
         const res = await fetch(
-          `https://api.opentripmap.com/0.1/en/places/radius?radius=${params.radius}&lon=${ctxLocation.lng}&lat=${ctxLocation.lat}&kinds=${props.pointsOfInterest}&rate=${params.rate}&format=json&limit=${params.limit}&apikey=${API_KEY}`
+          `https://api.opentripmap.com/0.1/en/places/radius?radius=${params.radius}&lon=${ctxLocation.lng}&lat=${ctxLocation.lat}&kinds=${pointsOfInterest}&rate=${params.rate}&format=json&limit=${params.limit}&apikey=${API_KEY}`
         );
         const resData = await res.json();
         //console.log(resData);
@@ -77,14 +77,14 @@ const RadiusSearch = (props) => {
     <Fragment>
       <div
         className="search-container"
-        style={{ backgroundImage: `url(${props.background})` }}
+        style={{ backgroundImage: `url(${background})` }}
       >
-        <h2 id={props.id}>{props.title}</h2>
+        <h2 id={id}>{title}</h2>
         <div className="search-form">
-          <p>{props.quote}</p>
+          <p>{quote}</p>
           <RadiusSearchForm
             onSearch={paramsHandler}
-            buttonActive={props.buttonActive}
+            buttonActive={buttonActive}
           />
         </div>
       </div>

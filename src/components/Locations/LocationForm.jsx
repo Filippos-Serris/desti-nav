@@ -5,6 +5,8 @@ import "../../assets/stylesheets/Locations/LocationForm.css";
 const isEmpty = (value) => value.trim() === "";
 
 const LocationForm = (props) => {
+  const {onAddress} = props;
+
   const [formInputValidity, setFormInputValidity] = useState({
     street: true,
     country: true,
@@ -31,7 +33,7 @@ const LocationForm = (props) => {
     });
 
     if (!isEmpty(enteredStreet) && !isEmpty(enteredCountry)) {
-      props.onAddress(
+      onAddress(
         `${enteredStreet} ${enteredNum}, ${enteredCountry}, ${enteredCity}, ${enteredPostal}`
       );
     }

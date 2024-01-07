@@ -10,42 +10,44 @@ const Backdrop = (props) => {
 };
 
 const ModalOverlay = (props) => {
-  const distance = props.object.distance / 1000;
+  const {object,closeObject} = props
+  const distance = object.distance / 1000;
   return (
     <div className="modal">
-      <h2 className="name">{props.object.name}</h2>
+      <h2 className="name">{object.name}</h2>
 
       <div className="info-container">
-        <p className="object-address">{props.object.address}</p>
+        <p className="object-address">{object.address}</p>
         <div className="object-distance">
           <h3>Distance</h3>
           <p>{`${distance.toFixed(1)}km`}</p>
         </div>
 
-        <p className="object-rate">{`Rate: ${props.object.rate}`}</p>
+        <p className="object-rate">{`Rate: ${object.rate}`}</p>
       </div>
 
       <div className="kinds">
-        <p>{props.object.kinds}</p>
+        <p>{object.kinds}</p>
       </div>
 
-      <a href={props.object.url} target="_blank">
+      <a href={object.url} target="_blank">
         Click here fro more info
       </a>
-      <button onClick={props.closeObject}>Close</button>
+      <button onClick={closeObject}>Close</button>
     </div>
   );
 };
 
 const ObjectModal = (props) => {
+  const {object,closeObject} = props
   return (
     <Fragment>
       {ReactDOM.createPortal(
-        <Backdrop closeObject={props.closeObject} />,
+        <Backdrop closeObject={closeObject} />,
         document.getElementById("backdrop-root")
       )}
       {ReactDOM.createPortal(
-        <ModalOverlay object={props.object} closeObject={props.closeObject} />,
+        <ModalOverlay object={object} closeObject={closeObject} />,
         document.getElementById("overlay-root")
       )}
     </Fragment>
