@@ -1,4 +1,4 @@
-import "./Card.css";
+import "../../assets/stylesheets/UI/Card.css";
 const Card = (props) => {
   return <div className="card">{props.children}</div>;
 };

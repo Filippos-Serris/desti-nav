@@ -1,6 +1,6 @@
 import { Link } from "react-scroll";
 
-import "./Header.css";
+import "../../assets/stylesheets/UI/Header.css";
 
 const Header = (props) => {
   return (

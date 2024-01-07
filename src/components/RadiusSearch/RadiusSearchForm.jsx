@@ -1,6 +1,6 @@
 import { useRef, useState, useContext } from "react";
 
-import "./RadiusSearchForm.css";
+import "../../assets/stylesheets/RadiusSearch/RadiusSearchForm.css";
 
 import LocationContext from "../../store/location-context";
 

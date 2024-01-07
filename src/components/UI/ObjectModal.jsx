@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import ReactDOM from "react-dom";
 
-import "./ObjectModal.css";
+import "../../assets/stylesheets/UI/ObjectModal.css";
 
 const API_KEY = "5ae2e3f221c38a28845f05b6489e6f49a73600131a4aece3c12d2d07";
 

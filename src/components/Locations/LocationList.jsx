@@ -1,4 +1,4 @@
-import "./LocationList.css";
+import "../../assets/stylesheets/Locations/LocationList.css"
 
 import Location from "./Location";
 

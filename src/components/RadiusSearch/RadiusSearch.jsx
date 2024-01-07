@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext, Fragment } from "react";
 
-import "./RadiusSearch.css";
+import "../../assets/stylesheets/RadiusSearch/RadiusSearch.css";
 
 import RadiusSearchForm from "./RadiusSearchForm";
 import ObjectList from "./ObjectList";

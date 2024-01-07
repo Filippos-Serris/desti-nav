@@ -1,6 +1,6 @@
 import { useEffect, useContext, useState } from "react";
 
-import "./Weather.css";
+import "../../assets/stylesheets/Weather/Weather.css";
 
 import LocationContext from "../../store/location-context";
 import Card from "../UI/Card";
