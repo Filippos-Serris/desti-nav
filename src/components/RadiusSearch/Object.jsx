@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import "./Object.css";
+import "../../assets/stylesheets/RadiusSearch/Object.css"
 
 import ObjectModal from "../UI/ObjectModal";
 

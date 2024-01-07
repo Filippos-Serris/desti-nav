@@ -2,7 +2,7 @@
     padding: 0;
     padding-top: 1rem;
     margin: 3rem 1rem 0 1rem;
-    background-image: url(../../assets/location-list-background.jpg);
+    background-image: url("../../img/location-list-background.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

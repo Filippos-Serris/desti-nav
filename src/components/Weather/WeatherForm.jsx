@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import "./WeatherForm.css";
+import "../../assets/stylesheets/Weather/WeatherForm.css";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";

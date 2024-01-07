@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import "./ObjectList.css";
+import "../../assets/stylesheets/RadiusSearch/ObjectList.css"
 
 import Object from "./Object";
 import Card from "../UI/Card";

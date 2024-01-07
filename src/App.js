@@ -1,11 +1,11 @@
 import { Fragment, useState } from "react";
 
-import background from "./assets/background.jpg";
-import LandmarksBackground from "./assets/landmarks.jpg";
-import DiningBackground from "./assets/dining.jpg";
-import CoffeeBackground from "./assets/coffee.jpg";
-import DrinksBackground from "./assets/drinking.jpg";
-import ActivitiesBackground from "./assets/activities.jpg";
+import background from "./assets/img/background.jpg";
+import LandmarksBackground from "./assets/img/landmarks.jpg";
+import DiningBackground from "./assets/img/dining.jpg";
+import CoffeeBackground from "./assets/img/coffee.jpg";
+import DrinksBackground from "./assets/img/drinking.jpg";
+import ActivitiesBackground from "./assets/img/activities.jpg";
 
 import Header from "./components/UI/Header";
 import Locations from "./components/Locations/Locations";

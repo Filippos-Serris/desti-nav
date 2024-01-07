@@ -1,7 +1,7 @@
 import { useState, useEffect, Fragment } from "react";
 import React from "react";
 
-import "./Locations.css";
+import"../../assets/stylesheets/Locations/Locations.css"
 
 import LocationForm from "./LocationForm";
 import LocationList from "./LocationList";

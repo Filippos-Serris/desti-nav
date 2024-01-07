@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import "./Location.css";
+import "../../assets/stylesheets/Locations/Location.css";
 
 import LocationContext from "../../store/location-context";
 
