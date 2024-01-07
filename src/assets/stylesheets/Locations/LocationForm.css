@@ -46,7 +46,7 @@
 .location-form button {
     width: 2rem;
     height: 2rem;
-    background-image: url('../../assets/search-arrow.png');
+    background-image: url('../../img/search-arrow.png');
     border: thin solid grey;
     font-size: medium;
     margin: 0;

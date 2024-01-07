@@ -1,6 +1,6 @@
 import { Fragment, useRef, useState } from "react";
 
-import "./LocationForm.css";
+import "../../assets/stylesheets/Locations/LocationForm.css";
 
 const isEmpty = (value) => value.trim() === "";
 

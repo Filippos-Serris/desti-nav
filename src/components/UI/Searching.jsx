@@ -1,4 +1,4 @@
-import "./Searching.css";
+import "../../assets/stylesheets/UI/Searching.css";
 
 const Searching = () => {
   return <p className="searching">Searching...</p>;
