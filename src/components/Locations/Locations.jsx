@@ -1,7 +1,7 @@
 import { useState, useEffect, Fragment } from "react";
 import React from "react";
 
-import"../../assets/stylesheets/Locations/Locations.css"
+import "../../assets/stylesheets/Locations/Locations.css";
 
 import LocationForm from "./LocationForm";
 import LocationList from "./LocationList";
@@ -35,6 +35,8 @@ const Locations = () => {
           `https://api.opencagedata.com/geocode/v1/json?q=${address}&key=${GEOCODING_API_KEY}`
         );
         const resData = await res.json();
+
+        console.log(resData);
 
         const returnedLocations = [];
         resData.results.map((data) =>
