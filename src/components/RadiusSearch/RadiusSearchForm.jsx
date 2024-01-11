@@ -59,9 +59,6 @@ const RadiusSearchForm = (props) => {
         rate: enteredRate,
       });
     }
-    /*console.log(
-      `Radius:${enteredRadius}, Limit:${enteredLimit}, Rate:${enteredRate}`
-    );*/
   };
 
   return (

@@ -33,7 +33,6 @@ const Object = (props) => {
         `https://api.opentripmap.com/0.1/en/places/xid/${object.id}?apikey=${API_KEY}`
       );
       const resData = await res.json();
-      //console.log(resData);
 
       setReturnedInformation({
         name: resData.name,
@@ -42,7 +41,6 @@ const Object = (props) => {
         rate: resData.rate,
         url: resData.otm,
       });
-      //console.log(returnedInformation);
     }
     fetchDetails();
   }, [firstLoad]);

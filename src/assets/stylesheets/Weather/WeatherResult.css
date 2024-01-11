@@ -1,0 +1,67 @@
+.weather-result-container {
+    border: solid thin black;
+    border-radius: 1rem;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: center;
+}
+
+.temp-label {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.weather-code {
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    font-weight: bold;
+    margin-top: auto;
+}
+
+.basic-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.calender-container {
+    box-shadow: 0.2rem 0.2rem 0.2rem black;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+
+}
+
+.result-month {
+    background-color: red;
+    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 0.5rem;
+    padding: 0.2rem 0.5rem;
+
+}
+
+.result-date {
+    background-color: white;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    color: black;
+    padding: 0.5rem 0.5rem;
+}
+
+.avg-temp {
+    padding-left: 1rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.min-max-temps {
+    font-size: small;
+}
+
+.feels-like {
+    margin-top: 1rem;
+}
