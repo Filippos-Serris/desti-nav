@@ -1,0 +1,13 @@
+.weather-result-list-container {
+    display: flex;
+    justify-content: center;
+}
+
+.weather-result-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 10rem;
+    grid-auto-rows: 10rem;
+    margin: 2rem;
+    gap: 1rem;
+}

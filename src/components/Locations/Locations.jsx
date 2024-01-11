@@ -1,7 +1,7 @@
 import { useState, useEffect, Fragment } from "react";
 import React from "react";
 
-import"../../assets/stylesheets/Locations/Locations.css"
+import "../../assets/stylesheets/Locations/Locations.css";
 
 import LocationForm from "./LocationForm";
 import LocationList from "./LocationList";
@@ -36,6 +36,8 @@ const Locations = () => {
         );
         const resData = await res.json();
 
+        console.log(resData);
+
         const returnedLocations = [];
         resData.results.map((data) =>
           returnedLocations.push({
@@ -51,7 +53,6 @@ const Locations = () => {
         }
         setLoading(false);
         setGeoResponse(returnedLocations);
-        //console.log(geoResponse);
       } catch (error) {
         console.log(error);
       }

@@ -7,7 +7,9 @@
     background-color: white;
     border-bottom: solid thin black;
     display: flex;
-    margin: 0 1rem;
+    margin: 0;
+    padding-left: 1rem;
+    z-index: 1;
 }
 
 .navigation ul {
@@ -21,15 +23,3 @@ li {
     margin-right: 1rem;
     list-style: none;
 }
-
-/*.navigation h2 {
-    background-image: url("../../assets/destinav.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 3rem;
-    width: 6rem;
-    margin: 0.5rem 0 0 0;
-    border-radius: 1rem;
-    padding: 1rem
-}*/
