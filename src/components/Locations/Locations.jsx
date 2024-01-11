@@ -51,7 +51,6 @@ const Locations = () => {
         }
         setLoading(false);
         setGeoResponse(returnedLocations);
-        //console.log(geoResponse);
       } catch (error) {
         console.log(error);
       }

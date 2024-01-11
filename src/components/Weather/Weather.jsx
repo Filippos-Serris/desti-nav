@@ -7,7 +7,8 @@ import WeatherForm from "./WeatherForm";
 import WeatherResultsList from "./WeatherResultsList";
 
 const Weather = (props) => {
-  const {id,buttonActive} = props
+  const { id, buttonActive } = props;
+  const [emptyDate, setEmptyDate] = useState({ from: false, to: false });
   const [apiResponse, setApiResponse] = useState([]);
   const [wrongDates, setWrongDates] = useState(false);
   const [weatherListActive, setWeatherListActive] = useState(false);
@@ -48,7 +49,7 @@ const Weather = (props) => {
     async function fetchWeather() {
       try {
         const res = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${ctxLocation.lat}&longitude=${ctxLocation.lng}1&current=temperature_2m,relative_humidity_2m&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,visibility&daily=temperature_2m_max,temperature_2m_min&start_date=${dates.startDate}&end_date=${dates.endDate}`
+          `https://api.open-meteo.com/v1/forecast?latitude=${ctxLocation.lat}&longitude=${ctxLocation.lng}&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,rain_sum,showers_sum,snowfall_sum&timezone=auto&start_date=${dates.startDate}&end_date=${dates.endDate}`
         );
         const resData = await res.json();
         console.log(resData);
@@ -67,7 +68,12 @@ const Weather = (props) => {
             (returnedTemperatures[index] = {
               ...returnedTemperatures[index],
               min: resData.daily.temperature_2m_min[index],
+              apparentMin: resData.daily.apparent_temperature_min[index],
+
               max: resData.daily.temperature_2m_max[index],
+              apparentMax: resData.daily.apparent_temperature_max[index],
+
+              code: resData.daily.weather_code[index],
             })
         );
 
@@ -89,8 +95,15 @@ const Weather = (props) => {
       dates.endDate === "" ||
       !compareDates(dates.startDate, dates.endDate)
     ) {
+      if (dates.startDate === "") {
+        setEmptyDate({ ...emptyDate, to: true });
+      }
+      if (dates.endDate === "") {
+        setEmptyDate({ ...emptyDate, from: true });
+      }
       setWrongDates(true);
     } else {
+      setEmptyDate({ from: false, to: false });
       setWrongDates(false);
       setFirstCall(false);
       setSearch(!search);
@@ -99,15 +112,25 @@ const Weather = (props) => {
 
   return (
     <div className="weather-form-container">
-      <h2 className="title" id={id}>Weather Section</h2>
+      <h2 className="title" id={id}>
+        Weather Section
+      </h2>
       <p className="instructions">
         Keep in mind that weather results range from 6 months prior to current
         date until 15 days ahead
       </p>
 
       <form className="date-form" onSubmit={searchHandler}>
-        <WeatherForm title="From" setter={setDateRange}></WeatherForm>
-        <WeatherForm title="to" setter={setDateRange}></WeatherForm>
+        <WeatherForm
+          title="From"
+          setter={setDateRange}
+          emptyDate={emptyDate.from}
+        ></WeatherForm>
+        <WeatherForm
+          title="to"
+          setter={setDateRange}
+          emptyDate={emptyDate.to}
+        ></WeatherForm>
 
         <button disabled={buttonActive} />
       </form>
@@ -125,3 +148,5 @@ const Weather = (props) => {
 };
 
 export default Weather;
+
+//`https://api.open-meteo.com/v1/forecast?latitude=${ctxLocation.lat}&longitude=${ctxLocation.lng}1&current=temperature_2m,relative_humidity_2m&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,visibility&daily=temperature_2m_max,temperature_2m_min&start_date=${dates.startDate}&end_date=${dates.endDate}`

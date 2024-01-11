@@ -1,3 +1,22 @@
+.date p {
+    margin-right: 2rem;
+    text-align: center;
+}
+
 .weather-form {
-    width: 20rem;
+    padding: 0.2rem;
+    border-radius: 1rem;
+    border: solid thin grey;
+    width: fit-content;
+    margin-right: 2rem;
+    text-align: center;
+}
+
+.empty-weather-form {
+    padding: 0.2rem;
+    border-radius: 1rem;
+    border: solid thin red;
+    width: fit-content;
+    margin-right: 2rem;
+    text-align: center;
 }
