@@ -12,11 +12,12 @@ import Locations from "./components/Locations/Locations";
 import LocationContext from "./store/location-context.js";
 import RadiusSearch from "./components/RadiusSearch/RadiusSearch";
 import Weather from "./components/Weather/Weather";
-import Currency from "./components/Currency";
+import Currency from "./components/Currency/Currency.jsx";
 import Footer from "./components/UI/Footer";
 
 function App() {
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [currency, setCurrency] = useState();
 
   const handleSelectedLocation = (selectedLocation) => {
     ctxValue.address = selectedLocation.address;
@@ -94,7 +95,7 @@ function App() {
       <Header menuOn={true /*searchesActivated*/} />
       <div className="backgroundDivStyle">
         <LocationContext.Provider value={ctxValue}>
-          <Locations />
+          <Locations setCurrency={setCurrency} />
 
           {radiusSearchSpecifications.map((data) => (
             <RadiusSearch
@@ -109,7 +110,7 @@ function App() {
           ))}
 
           <Weather id="weather" buttonActive={buttonDisabled} />
-          <Currency id="currency" />
+          <Currency id="currency" currency={currency} />
         </LocationContext.Provider>
       </div>
 
