@@ -1,4 +1,6 @@
-import { Fragment, useRef } from "react";
+import { useRef } from "react";
+
+import "../../assets/stylesheets/Currency/CurrencyForm.css";
 
 const CurrencyForm = (props) => {
   const { currencies, onSearch } = props;
@@ -15,6 +17,10 @@ const CurrencyForm = (props) => {
     isoTo.current = event.target.value;
   };
 
+  const revertIso = (event) => {
+    event.preventDefault();
+  };
+
   const formHandler = (event) => {
     event.preventDefault();
     let enteredAmount = amount.current.value;
@@ -26,48 +32,46 @@ const CurrencyForm = (props) => {
   };
 
   return (
-    <form onSubmit={formHandler}>
-      <label htmlFor="currency-amount">Amount</label>
-      <input
-        id="currency-amount"
-        placeholder="10.75"
-        type="number"
-        step="any"
-        pattern="[0-9]+(\.[0-9]+)?"
-        ref={amount}
-      ></input>
+    <form className="currency-form" onSubmit={formHandler}>
+      <div className="currency-input">
+        <label htmlFor="currency-amount">Amount:</label>
+        <input
+          id="currency-amount"
+          placeholder="10.75"
+          type="number"
+          step="any"
+          pattern="[0-9]+(\.[0-9]+)?"
+          ref={amount}
+        ></input>
+      </div>
 
-      <select onChange={currencyFromHandler}>
-        {currencies.map((data) => (
-          <option key={data.iso} value={data.iso}>
-            {data.iso} - {data.currency}
-          </option>
-        ))}
-      </select>
+      <div className="currency-input">
+        <label htmlFor="currencyFrom">From</label>
+        <select id="currencyFrom" onChange={currencyFromHandler}>
+          {currencies.map((data) => (
+            <option key={data.iso} value={data.iso}>
+              {data.iso} - {data.currency}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      <select onChange={currencyToHandler}>
-        {currencies.map((data) => (
-          <option key={data.iso} value={data.iso}>
-            {data.iso} - {data.currency}
-          </option>
-        ))}
-      </select>
+      <button className="revert-iso" onClick={revertIso}></button>
 
-      <button />
+      <div className="currency-input">
+        <label htmlFor="currencyTo">To</label>
+        <select id="currencyTo" onChange={currencyToHandler}>
+          {currencies.map((data) => (
+            <option key={data.iso} value={data.iso}>
+              {data.iso} - {data.currency}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <button className="convert-currency" />
     </form>
   );
 };
 
 export default CurrencyForm;
-
-/*
-
-return (
-    <Fragment>
-      {currencies.map((data) => (
-        <p>{data.iso}</p>
-      ))}
-    </Fragment>
-  );
-
-  */
