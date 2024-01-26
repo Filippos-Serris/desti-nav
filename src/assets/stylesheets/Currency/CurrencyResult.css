@@ -1,0 +1,24 @@
+.currency-result-container {
+    display: flex;
+    flex-direction: row;
+    font-size: larger;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 1rem;
+    justify-content: center;
+    width: fit-content;
+}
+
+.currency-result {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-right: 2rem;
+}
+
+.currency-rate {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-left: 2rem;
+}

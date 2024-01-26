@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 import "../../assets/stylesheets/Currency/Currency.css";
+
 import CurrencyForm from "./CurrencyForm";
 import CurrencyResult from "./CurrencyResult";
 
 const EXCHANGE_RATE_API_KEY = "2592ad5d7efc53ce945f9b32";
 
 const Currency = (props) => {
-  const { id, currency } = props;
+  const { id, currency, buttonDisabled } = props;
 
   const [apiCurrencyResponse, setApiCurrencyResponse] = useState([]);
   const [apiPairConversion, setApiPairConversion] = useState({
@@ -63,7 +64,7 @@ const Currency = (props) => {
           rate: resData.conversion_rate,
           result: resData.conversion_result,
         });
-        //console.log(resData);
+        console.log(resData);
       } catch (error) {
         console.log(error);
       }
@@ -76,14 +77,23 @@ const Currency = (props) => {
       <h2 className="title" id={id}>
         Currency
       </h2>
+      <div className="currency-container">
+        <CurrencyForm
+          currencies={apiCurrencyResponse}
+          onSearch={paramsHandler}
+          buttonDisabled={buttonDisabled}
+        />
 
-      <CurrencyForm currencies={apiCurrencyResponse} onSearch={paramsHandler} />
-      <CurrencyResult result={apiPairConversion} info={params} />
-
-      <p className="hint">
-        The currency of the location selected above is {currency} before prosed
-        check for the validity of this information
-      </p>
+        {!buttonDisabled && (
+          <Fragment>
+            <CurrencyResult result={apiPairConversion} info={params} />
+            <p className="hint">
+              The currency of the location selected above is {currency} before
+              prosed check for the validity of this information
+            </p>
+          </Fragment>
+        )}
+      </div>
     </div>
   );
 };

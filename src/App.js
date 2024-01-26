@@ -105,12 +105,16 @@ function App() {
               title={data.title}
               quote={data.quote}
               pointsOfInterest={data.pointsOfInterest}
-              buttonActive={buttonDisabled}
+              buttonDisabled={buttonDisabled}
             />
           ))}
 
-          <Weather id="weather" buttonActive={buttonDisabled} />
-          <Currency id="currency" currency={currency} />
+          <Weather id="weather" buttonDisabled={buttonDisabled} />
+          <Currency
+            id="currency"
+            currency={currency}
+            buttonDisabled={buttonDisabled}
+          />
         </LocationContext.Provider>
       </div>
 

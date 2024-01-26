@@ -1,40 +1,46 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import "../../assets/stylesheets/Currency/CurrencyForm.css";
 
 const CurrencyForm = (props) => {
-  const { currencies, onSearch } = props;
-  //console.log(currencies);
+  const { currencies, onSearch, buttonDisabled } = props;
 
   const amount = useRef();
-  const isoFrom = useRef();
-  const isoTo = useRef();
+
+  const [isoFrom, setIsoFrom] = useState();
+  const [isoTo, setIsoTo] = useState();
 
   const currencyFromHandler = (event) => {
-    isoFrom.current = event.target.value;
+    setIsoFrom(event.target.value);
   };
   const currencyToHandler = (event) => {
-    isoTo.current = event.target.value;
+    setIsoTo(event.target.value);
   };
 
   const revertIso = (event) => {
     event.preventDefault();
+
+    const isoBetween = isoFrom;
+
+    setIsoFrom(isoTo);
+    setIsoTo(isoBetween);
   };
 
   const formHandler = (event) => {
     event.preventDefault();
+
     let enteredAmount = amount.current.value;
     onSearch({
       amount: enteredAmount,
-      isoFrom: isoFrom.current,
-      isoTo: isoTo.current,
+      isoFrom: isoFrom.substring(0, 3),
+      isoTo: isoTo.substring(0, 3),
     });
   };
 
   return (
     <form className="currency-form" onSubmit={formHandler}>
       <div className="currency-input">
-        <label htmlFor="currency-amount">Amount:</label>
+        <label htmlFor="currency-amount">Amount</label>
         <input
           id="currency-amount"
           placeholder="10.75"
@@ -46,30 +52,33 @@ const CurrencyForm = (props) => {
       </div>
 
       <div className="currency-input">
-        <label htmlFor="currencyFrom">From</label>
-        <select id="currencyFrom" onChange={currencyFromHandler}>
+        <label>From</label>
+        <select
+          id="currencyFrom"
+          onChange={currencyFromHandler}
+          value={isoFrom}
+        >
           {currencies.map((data) => (
-            <option key={data.iso} value={data.iso}>
+            <option key={data.iso} value={`${data.iso} - ${data.currency}`}>
               {data.iso} - {data.currency}
             </option>
           ))}
         </select>
       </div>
 
-      <button className="revert-iso" onClick={revertIso}></button>
+      <button className="revert-iso" onClick={revertIso} />
 
       <div className="currency-input">
-        <label htmlFor="currencyTo">To</label>
-        <select id="currencyTo" onChange={currencyToHandler}>
+        <label>To</label>
+        <select id="currencyTo" onChange={currencyToHandler} value={isoTo}>
           {currencies.map((data) => (
-            <option key={data.iso} value={data.iso}>
+            <option key={data.iso} value={`${data.iso} - ${data.currency}`}>
               {data.iso} - {data.currency}
             </option>
           ))}
         </select>
       </div>
-
-      <button className="convert-currency" />
+      <button className="convert-currency" disabled={buttonDisabled} />
     </form>
   );
 };
