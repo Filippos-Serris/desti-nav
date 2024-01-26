@@ -10,8 +10,9 @@ import Searching from "../UI/Searching";
 const API_KEY = "5ae2e3f221c38a28845f05b6489e6f49a73600131a4aece3c12d2d07";
 
 const RadiusSearch = (props) => {
-  const {id,background,title,quote,pointsOfInterest,buttonActive} = props
-  const [apiResponse, setApiResponse] = useState([])
+  const { id, background, title, quote, pointsOfInterest, buttonDisabled } =
+    props;
+  const [apiResponse, setApiResponse] = useState([]);
   const [params, setParams] = useState({});
 
   const [firstLoad, setFirstLoad] = useState(true);
@@ -83,7 +84,7 @@ const RadiusSearch = (props) => {
           <p>{quote}</p>
           <RadiusSearchForm
             onSearch={paramsHandler}
-            buttonActive={buttonActive}
+            buttonDisabled={buttonDisabled}
           />
         </div>
       </div>
