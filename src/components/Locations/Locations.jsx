@@ -9,7 +9,9 @@ import Searching from "../UI/Searching";
 
 const GEOCODING_API_KEY = "845ebdcc2d794f9785f968141732d5d9";
 
-const Locations = () => {
+const Locations = (props) => {
+  const { setCurrency } = props;
+
   const [address, setAddress] = useState();
   const [geoResponse, setGeoResponse] = useState([]);
 
@@ -39,14 +41,15 @@ const Locations = () => {
         console.log(resData);
 
         const returnedLocations = [];
-        resData.results.map((data) =>
+        resData.results.map((data) => {
+          setCurrency(data.annotations.currency.iso_code);
           returnedLocations.push({
             address: data.formatted,
             lat: data.geometry.lat,
             lng: data.geometry.lng,
             flag: data.annotations.flag,
-          })
-        );
+          });
+        });
 
         if (returnedLocations.length > 0) {
           setShowList(true);

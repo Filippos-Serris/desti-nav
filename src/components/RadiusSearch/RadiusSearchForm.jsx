@@ -5,7 +5,7 @@ import "../../assets/stylesheets/RadiusSearch/RadiusSearchForm.css";
 import LocationContext from "../../store/location-context";
 
 const RadiusSearchForm = (props) => {
-  const {onSearch,buttonActive} = props
+  const { onSearch, buttonDisabled } = props;
   const locationCtx = useContext(LocationContext);
 
   const [validForm, setValidForm] = useState({
@@ -98,7 +98,7 @@ const RadiusSearchForm = (props) => {
         </select>
       </div>
 
-      <button disabled={buttonActive} />
+      <button disabled={buttonDisabled} />
     </form>
   );
 };
