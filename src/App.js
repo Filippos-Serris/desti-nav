@@ -16,7 +16,7 @@ import Currency from "./components/Currency/Currency.jsx";
 import Footer from "./components/UI/Footer";
 
 function App() {
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [currency, setCurrency] = useState();
 
   const handleSelectedLocation = (selectedLocation) => {
