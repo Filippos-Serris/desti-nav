@@ -90,12 +90,16 @@ function App() {
     filter: "blur(8px)",
   };
 
+  const enableForms = () => {
+    setButtonDisabled(false);
+  };
+
   return (
     <Fragment>
-      <Header menuOn={true /*searchesActivated*/} />
+      <Header />
       <div className="backgroundDivStyle">
         <LocationContext.Provider value={ctxValue}>
-          <Locations setCurrency={setCurrency} />
+          <Locations setCurrency={setCurrency} enableForms={enableForms} />
 
           {radiusSearchSpecifications.map((data) => (
             <RadiusSearch

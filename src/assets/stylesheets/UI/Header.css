@@ -23,3 +23,7 @@ li {
     margin-right: 1rem;
     list-style: none;
 }
+
+li:hover {
+    cursor: pointer;
+}

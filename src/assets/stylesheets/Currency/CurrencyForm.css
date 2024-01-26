@@ -67,3 +67,7 @@ input {
     border-radius: 5rem;
     align-self: center;
 }
+
+.currency-form button:disabled {
+    cursor: not-allowed;
+}
