@@ -5,11 +5,12 @@ import "../../assets/stylesheets/Locations/Location.css";
 import LocationContext from "../../store/location-context";
 
 const Location = (props) => {
-  const {address} = props
+  const { address, enableForms } = props;
   const locationCtx = useContext(LocationContext);
 
   const locationHandler = () => {
     locationCtx.setSelectedLocation(props.address);
+    enableForms();
   };
 
   return (

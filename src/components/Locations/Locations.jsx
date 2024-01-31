@@ -10,7 +10,7 @@ import Searching from "../UI/Searching";
 const GEOCODING_API_KEY = "845ebdcc2d794f9785f968141732d5d9";
 
 const Locations = (props) => {
-  const { setCurrency } = props;
+  const { setCurrency, enableForms } = props;
 
   const [address, setAddress] = useState();
   const [geoResponse, setGeoResponse] = useState([]);
@@ -70,7 +70,9 @@ const Locations = (props) => {
         <LocationForm onAddress={addressHandler} />
       </div>
       {loading && <Searching />}
-      {showList && <LocationList addresses={geoResponse} />}
+      {showList && (
+        <LocationList addresses={geoResponse} enableForms={enableForms} />
+      )}
     </Fragment>
   );
 };

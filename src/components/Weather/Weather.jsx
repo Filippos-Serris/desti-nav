@@ -7,7 +7,7 @@ import WeatherForm from "./WeatherForm";
 import WeatherResultsList from "./WeatherResultsList";
 
 const Weather = (props) => {
-  const { id, buttonActive } = props;
+  const { id, buttonDisabled } = props;
   const [emptyDate, setEmptyDate] = useState({ from: false, to: false });
   const [apiResponse, setApiResponse] = useState([]);
   const [wrongDates, setWrongDates] = useState(false);
@@ -132,7 +132,7 @@ const Weather = (props) => {
           emptyDate={emptyDate.to}
         ></WeatherForm>
 
-        <button disabled={buttonActive} />
+        <button disabled={buttonDisabled} />
       </form>
       {weatherListActive && (
         <WeatherResultsList weatherConditions={apiResponse} />
