@@ -39,6 +39,7 @@
 .object-address {
     grid-area: 1/1/1/3;
     text-align: center;
+    text-decoration: underline;
 }
 
 .object-distance {
@@ -49,6 +50,8 @@
     border-radius: 1rem;
     text-align: center;
     justify-self: center;
+    background-color: orange;
+    color: white;
 }
 
 .distance h3 {
@@ -60,8 +63,23 @@
     text-align: center;
 }
 
-.kinds {
+.kinds-list {
     padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    border: solid thin orange;
+    border-radius: 1rem;
+    color: white;
+    width: fit-content;
+    align-self: center;
+}
+
+.kind {
+    padding: 0.5rem;
+    background-color: orange;
+    border-radius: 1rem;
+    width: fit-content;
+    margin: 0 0.1rem;
 }
 
 
