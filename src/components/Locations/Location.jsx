@@ -9,8 +9,8 @@ const Location = (props) => {
   const locationCtx = useContext(LocationContext);
 
   const locationHandler = () => {
-    locationCtx.setSelectedLocation(props.address);
     enableForms();
+    locationCtx.setSelectedLocation(props.address);
   };
 
   return (

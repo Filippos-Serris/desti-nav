@@ -41,9 +41,11 @@ const RadiusSearchForm = (props) => {
   const searchHandler = (event) => {
     event.preventDefault();
 
-    let enteredRadius = radius.current.value;
-    let enteredLimit = limit.current.value;
-    let enteredRate = rate.current;
+    console.log("search pressed");
+
+    const enteredRadius = radius.current.value;
+    const enteredLimit = limit.current.value;
+    const enteredRate = rate.current;
 
     formValidity(enteredRadius, enteredLimit);
 
@@ -53,6 +55,7 @@ const RadiusSearchForm = (props) => {
       locationCtx.lat !== null &&
       locationCtx.lng !== null
     ) {
+      console.log("onSearch run");
       onSearch({
         radius: enteredRadius,
         limit: enteredLimit,
