@@ -11,6 +11,7 @@ const Currency = (props) => {
   const { id, currency, buttonDisabled } = props;
 
   const [apiCurrencyResponse, setApiCurrencyResponse] = useState([]);
+  const [resultShown, setResultShown] = useState(false);
   const [apiPairConversion, setApiPairConversion] = useState({
     rete: "",
     result: "",
@@ -24,9 +25,10 @@ const Currency = (props) => {
   });
 
   const paramsHandler = (params) => {
-    console.log(params);
+    //console.log(params);
     setFirstLoad(false);
     setParams(params);
+    setResultShown(true);
   };
 
   useEffect(() => {
@@ -84,14 +86,15 @@ const Currency = (props) => {
           buttonDisabled={buttonDisabled}
         />
 
+        {resultShown && (
+          <CurrencyResult result={apiPairConversion} info={params} />
+        )}
+
         {!buttonDisabled && (
-          <Fragment>
-            <CurrencyResult result={apiPairConversion} info={params} />
-            <p className="hint">
-              The currency of the location selected above is {currency} before
-              prosed check for the validity of this information
-            </p>
-          </Fragment>
+          <p className="hint">
+            The currency of the location selected above is {currency} before
+            prosed check for the validity of this information
+          </p>
         )}
       </div>
     </div>

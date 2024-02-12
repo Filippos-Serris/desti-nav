@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 
-import "../../assets/stylesheets/RadiusSearch/Object.css"
+import "../../assets/stylesheets/RadiusSearch/Object.css";
 
 import ObjectModal from "../UI/ObjectModal";
 
 const API_KEY = "5ae2e3f221c38a28845f05b6489e6f49a73600131a4aece3c12d2d07";
 
 const Object = (props) => {
-  const {object} = props
+  const { object } = props;
   const [firstLoad, setFirstLoad] = useState(true);
   const [search, setSearch] = useState(false);
+  const [objectReady, setObjectReady] = useState(false);
   const [returnedInformation, setReturnedInformation] = useState({});
   const gridColum = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
 
@@ -36,11 +37,14 @@ const Object = (props) => {
 
       setReturnedInformation({
         name: resData.name,
-        address: `${resData.address.road},${resData.address.neighbourhood}`,
+        road: resData.address.road,
+        neighbourhood: resData.address.neighbourhood,
         kinds: resData.kinds,
         rate: resData.rate,
         url: resData.otm,
       });
+
+      setObjectReady(true);
     }
     fetchDetails();
   }, [firstLoad]);
@@ -61,6 +65,7 @@ const Object = (props) => {
         <ObjectModal
           object={{ ...returnedInformation, distance: object.distance }}
           closeObject={closeObject}
+          objectReady={objectReady}
         />
       )}
     </div>

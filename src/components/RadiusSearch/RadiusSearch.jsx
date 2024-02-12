@@ -38,6 +38,7 @@ const RadiusSearch = (props) => {
     if (firstLoad) {
       return;
     }
+
     async function fetchObjects() {
       try {
         setSearching(true);
