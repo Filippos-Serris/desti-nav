@@ -59,6 +59,7 @@ const Locations = (props) => {
       } catch (error) {
         setSearching(false);
         console.log(error);
+        console.log(error.name);
       }
     }
     fetchLocation();
