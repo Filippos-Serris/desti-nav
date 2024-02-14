@@ -91,7 +91,7 @@ const RadiusSearch = (props) => {
       </div>
       {searching && <Searching />}
       {error && <p>{errorMessage}</p>}
-      {objectLIstActive && <ObjectList objects={apiResponse} />}
+      {objectLIstActive && !searching && <ObjectList objects={apiResponse} />}
     </Fragment>
   );
 };
