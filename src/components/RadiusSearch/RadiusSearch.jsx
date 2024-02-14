@@ -67,6 +67,7 @@ const RadiusSearch = (props) => {
         setApiResponse(returnedObjects);
         setError(false);
       } catch (error) {
+        setSearching(false);
         setError(true);
         setErrorMessage(error.message);
       }

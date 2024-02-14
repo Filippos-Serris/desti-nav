@@ -4,6 +4,7 @@ import "../../assets/stylesheets/Currency/Currency.css";
 
 import CurrencyForm from "./CurrencyForm";
 import CurrencyResult from "./CurrencyResult";
+import Searching from "../UI/Searching";
 
 const EXCHANGE_RATE_API_KEY = "2592ad5d7efc53ce945f9b32";
 
@@ -12,6 +13,7 @@ const Currency = (props) => {
 
   const [apiCurrencyResponse, setApiCurrencyResponse] = useState([]);
   const [resultShown, setResultShown] = useState(false);
+  const [searching, setSearching] = useState(false);
   const [apiPairConversion, setApiPairConversion] = useState({
     rete: "",
     result: "",
@@ -58,16 +60,22 @@ const Currency = (props) => {
 
     async function fetchCurrencyRate() {
       try {
+        setSearching(true);
         const res = await fetch(
           `https://v6.exchangerate-api.com/v6/${EXCHANGE_RATE_API_KEY}/pair/${params.isoFrom}/${params.isoTo}/${params.amount}`
         );
         const resData = await res.json();
+
+        setSearching(false);
+
         setApiPairConversion({
           rate: resData.conversion_rate,
           result: resData.conversion_result,
         });
+
         console.log(resData);
       } catch (error) {
+        setSearching(false);
         console.log(error);
       }
     }
@@ -85,8 +93,8 @@ const Currency = (props) => {
           onSearch={paramsHandler}
           buttonDisabled={buttonDisabled}
         />
-
-        {resultShown && (
+        {searching && <Searching />}
+        {resultShown && !searching && (
           <CurrencyResult result={apiPairConversion} info={params} />
         )}
 

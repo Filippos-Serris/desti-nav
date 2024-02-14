@@ -20,7 +20,7 @@ const Weather = (props) => {
     endDate: "",
   });
   const [search, setSearch] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [searching, setSearching] = useState(false);
 
   const setDateRange = (identifier, date) => {
     if (identifier === "From") {
@@ -48,7 +48,7 @@ const Weather = (props) => {
 
     async function fetchWeather() {
       try {
-        setLoading(true);
+        setSearching(true);
         const res = await fetch(
           `https://api.open-meteo.com/v1/forecast?latitude=${ctxLocation.lat}&longitude=${ctxLocation.lng}&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,rain_sum,showers_sum,snowfall_sum&timezone=auto&start_date=${dates.startDate}&end_date=${dates.endDate}`
         );
@@ -79,10 +79,11 @@ const Weather = (props) => {
         );
 
         setApiResponse(returnedTemperatures);
-        setLoading(false);
+        setSearching(false);
         setWeatherListActive(true);
       } catch (error) {
-        console.log(error);
+        setSearching(false);
+        console.log(error.message);
       }
     }
 
@@ -135,8 +136,8 @@ const Weather = (props) => {
 
         <button disabled={buttonDisabled} />
       </form>
-      {loading && <Searching />}
-      {weatherListActive && !loading && (
+      {searching && <Searching />}
+      {weatherListActive && !searching && (
         <WeatherResultsList weatherConditions={apiResponse} />
       )}
       {wrongDates && (
