@@ -70,7 +70,7 @@ const Locations = (props) => {
         <LocationForm onAddress={addressHandler} />
       </div>
       {loading && <Searching />}
-      {showList && (
+      {showList && !loading && (
         <LocationList addresses={geoResponse} enableForms={enableForms} />
       )}
     </Fragment>
