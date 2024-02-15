@@ -41,6 +41,7 @@ const RadiusSearch = (props) => {
 
     async function fetchObjects() {
       try {
+        setError(false);
         setSearching(true);
 
         const res = await fetch(
@@ -68,8 +69,8 @@ const RadiusSearch = (props) => {
         setError(false);
       } catch (error) {
         setSearching(false);
-        setError(true);
         setErrorMessage(error.message);
+        setError(true);
       }
     }
     fetchObjects();
@@ -91,7 +92,7 @@ const RadiusSearch = (props) => {
         </div>
       </div>
       {searching && <Hint />}
-      {error && <p>{errorMessage}</p>}
+      {error && <Hint message={errorMessage} />}
       {objectLIstActive && !searching && <ObjectList objects={apiResponse} />}
     </Fragment>
   );
