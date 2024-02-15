@@ -41,6 +41,7 @@ const Currency = (props) => {
   useEffect(() => {
     async function fetchCurrencies() {
       try {
+        setError(false);
         const res = await fetch(
           `https://v6.exchangerate-api.com/v6/${EXCHANGE_RATE_API_KEY}/codes`
         );
@@ -52,6 +53,8 @@ const Currency = (props) => {
         );
         setApiCurrencyResponse(supportedCurrencies);
       } catch (error) {
+        setErrorMessage(`${error.message}, unable to retrieve currencies.`);
+        setError(true);
         console.log(error);
       }
     }
@@ -101,6 +104,7 @@ const Currency = (props) => {
           buttonDisabled={buttonDisabled}
         />
         {searching && <Hint />}
+        {error && <Hint message={errorMessage} />}
         {resultShown && !searching && (
           <CurrencyResult result={apiPairConversion} info={params} />
         )}
