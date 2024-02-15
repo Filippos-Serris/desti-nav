@@ -4,7 +4,7 @@ import "../../assets/stylesheets/Currency/Currency.css";
 
 import CurrencyForm from "./CurrencyForm";
 import CurrencyResult from "./CurrencyResult";
-import Searching from "../UI/Searching";
+import Hint from "../UI/Hint";
 
 const EXCHANGE_RATE_API_KEY = "2592ad5d7efc53ce945f9b32";
 
@@ -93,7 +93,7 @@ const Currency = (props) => {
           onSearch={paramsHandler}
           buttonDisabled={buttonDisabled}
         />
-        {searching && <Searching />}
+        {searching && <Hint />}
         {resultShown && !searching && (
           <CurrencyResult result={apiPairConversion} info={params} />
         )}

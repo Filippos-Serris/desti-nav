@@ -5,7 +5,7 @@ import "../../assets/stylesheets/Locations/Locations.css";
 
 import LocationForm from "./LocationForm";
 import LocationList from "./LocationList";
-import Searching from "../UI/Searching";
+import Hint from "../UI/Hint";
 
 const GEOCODING_API_KEY = "845ebdcc2d794f9785f968141732d5d9";
 
@@ -19,6 +19,9 @@ const Locations = (props) => {
   const [showList, setShowList] = useState(false);
   const [searching, setSearching] = useState(false);
 
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
+
   const addressHandler = (address) => {
     setFirstLoad(false);
     setAddress(address);
@@ -31,6 +34,7 @@ const Locations = (props) => {
 
     async function fetchLocation() {
       try {
+        setError(false);
         setSearching(true);
 
         const res = await fetch(
@@ -58,8 +62,8 @@ const Locations = (props) => {
         setGeoResponse(returnedLocations);
       } catch (error) {
         setSearching(false);
-        console.log(error);
-        console.log(error.name);
+        setErrorMessage(error.message);
+        setError(true);
       }
     }
     fetchLocation();
@@ -71,7 +75,8 @@ const Locations = (props) => {
         <h2>Discover your next destination with DestiNav</h2>
         <LocationForm onAddress={addressHandler} />
       </div>
-      {searching && <Searching />}
+      {searching && <Hint />}
+      {error && <Hint message={errorMessage} />}
       {showList && !searching && (
         <LocationList addresses={geoResponse} enableForms={enableForms} />
       )}

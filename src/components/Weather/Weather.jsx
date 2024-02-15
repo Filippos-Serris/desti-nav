@@ -5,7 +5,7 @@ import "../../assets/stylesheets/Weather/Weather.css";
 import LocationContext from "../../store/location-context";
 import WeatherForm from "./WeatherForm";
 import WeatherResultsList from "./WeatherResultsList";
-import Searching from "../UI/Searching";
+import Hint from "../UI/Hint";
 
 const Weather = (props) => {
   const { id, buttonDisabled } = props;
@@ -136,7 +136,7 @@ const Weather = (props) => {
 
         <button disabled={buttonDisabled} />
       </form>
-      {searching && <Searching />}
+      {searching && <Hint />}
       {weatherListActive && !searching && (
         <WeatherResultsList weatherConditions={apiResponse} />
       )}
