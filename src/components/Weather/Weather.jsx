@@ -5,7 +5,7 @@ import "../../assets/stylesheets/Weather/Weather.css";
 import LocationContext from "../../store/location-context";
 import WeatherForm from "./WeatherForm";
 import WeatherResultsList from "./WeatherResultsList";
-import Searching from "../UI/Searching";
+import Hint from "../UI/Hint";
 
 const Weather = (props) => {
   const { id, buttonDisabled } = props;
@@ -21,6 +21,9 @@ const Weather = (props) => {
   });
   const [search, setSearch] = useState(false);
   const [searching, setSearching] = useState(false);
+
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
 
   const setDateRange = (identifier, date) => {
     if (identifier === "From") {
@@ -48,6 +51,7 @@ const Weather = (props) => {
 
     async function fetchWeather() {
       try {
+        setError(false);
         setSearching(true);
         const res = await fetch(
           `https://api.open-meteo.com/v1/forecast?latitude=${ctxLocation.lat}&longitude=${ctxLocation.lng}&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,rain_sum,showers_sum,snowfall_sum&timezone=auto&start_date=${dates.startDate}&end_date=${dates.endDate}`
@@ -83,7 +87,8 @@ const Weather = (props) => {
         setWeatherListActive(true);
       } catch (error) {
         setSearching(false);
-        console.log(error.message);
+        setErrorMessage(error.message);
+        setError(true);
       }
     }
 
@@ -136,7 +141,8 @@ const Weather = (props) => {
 
         <button disabled={buttonDisabled} />
       </form>
-      {searching && <Searching />}
+      {searching && <Hint />}
+      {error && <Hint message={errorMessage} />}
       {weatherListActive && !searching && (
         <WeatherResultsList weatherConditions={apiResponse} />
       )}

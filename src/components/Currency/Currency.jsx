@@ -4,7 +4,7 @@ import "../../assets/stylesheets/Currency/Currency.css";
 
 import CurrencyForm from "./CurrencyForm";
 import CurrencyResult from "./CurrencyResult";
-import Searching from "../UI/Searching";
+import Hint from "../UI/Hint";
 
 const EXCHANGE_RATE_API_KEY = "2592ad5d7efc53ce945f9b32";
 
@@ -12,8 +12,13 @@ const Currency = (props) => {
   const { id, currency, buttonDisabled } = props;
 
   const [apiCurrencyResponse, setApiCurrencyResponse] = useState([]);
+
   const [resultShown, setResultShown] = useState(false);
   const [searching, setSearching] = useState(false);
+
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState();
+
   const [apiPairConversion, setApiPairConversion] = useState({
     rete: "",
     result: "",
@@ -36,6 +41,7 @@ const Currency = (props) => {
   useEffect(() => {
     async function fetchCurrencies() {
       try {
+        setError(false);
         const res = await fetch(
           `https://v6.exchangerate-api.com/v6/${EXCHANGE_RATE_API_KEY}/codes`
         );
@@ -47,6 +53,8 @@ const Currency = (props) => {
         );
         setApiCurrencyResponse(supportedCurrencies);
       } catch (error) {
+        setErrorMessage(`${error.message}, unable to retrieve currencies.`);
+        setError(true);
         console.log(error);
       }
     }
@@ -60,6 +68,7 @@ const Currency = (props) => {
 
     async function fetchCurrencyRate() {
       try {
+        setError(false);
         setSearching(true);
         const res = await fetch(
           `https://v6.exchangerate-api.com/v6/${EXCHANGE_RATE_API_KEY}/pair/${params.isoFrom}/${params.isoTo}/${params.amount}`
@@ -76,7 +85,8 @@ const Currency = (props) => {
         console.log(resData);
       } catch (error) {
         setSearching(false);
-        console.log(error);
+        setErrorMessage(errorMessage);
+        setError(true);
       }
     }
     fetchCurrencyRate();
@@ -93,7 +103,8 @@ const Currency = (props) => {
           onSearch={paramsHandler}
           buttonDisabled={buttonDisabled}
         />
-        {searching && <Searching />}
+        {searching && <Hint />}
+        {error && <Hint message={errorMessage} />}
         {resultShown && !searching && (
           <CurrencyResult result={apiPairConversion} info={params} />
         )}

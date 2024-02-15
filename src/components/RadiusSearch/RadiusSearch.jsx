@@ -5,7 +5,7 @@ import "../../assets/stylesheets/RadiusSearch/RadiusSearch.css";
 import RadiusSearchForm from "./RadiusSearchForm";
 import ObjectList from "./ObjectList";
 import LocationContext from "../../store/location-context";
-import Searching from "../UI/Searching";
+import Hint from "../UI/Hint";
 
 const API_KEY = "5ae2e3f221c38a28845f05b6489e6f49a73600131a4aece3c12d2d07";
 
@@ -41,6 +41,7 @@ const RadiusSearch = (props) => {
 
     async function fetchObjects() {
       try {
+        setError(false);
         setSearching(true);
 
         const res = await fetch(
@@ -68,8 +69,8 @@ const RadiusSearch = (props) => {
         setError(false);
       } catch (error) {
         setSearching(false);
-        setError(true);
         setErrorMessage(error.message);
+        setError(true);
       }
     }
     fetchObjects();
@@ -90,8 +91,8 @@ const RadiusSearch = (props) => {
           />
         </div>
       </div>
-      {searching && <Searching />}
-      {error && <p>{errorMessage}</p>}
+      {searching && <Hint />}
+      {error && <Hint message={errorMessage} />}
       {objectLIstActive && !searching && <ObjectList objects={apiResponse} />}
     </Fragment>
   );
