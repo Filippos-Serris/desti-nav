@@ -9,16 +9,20 @@ import Hint from "../UI/Hint";
 
 const Weather = (props) => {
   const { id, buttonDisabled } = props;
-  const [emptyDate, setEmptyDate] = useState({ from: false, to: false });
-  const [apiResponse, setApiResponse] = useState([]);
-  const [wrongDates, setWrongDates] = useState(false);
-  const [weatherListActive, setWeatherListActive] = useState(false);
-  const [firstCall, setFirstCall] = useState(true);
   const ctxLocation = useContext(LocationContext);
+
+  const [emptyDate, setEmptyDate] = useState({ from: false, to: false });
+  const [wrongDates, setWrongDates] = useState(false);
   const [dates, setDates] = useState({
     startDate: "",
     endDate: "",
   });
+
+  const [apiResponse, setApiResponse] = useState([]);
+
+  const [weatherListActive, setWeatherListActive] = useState(false);
+  const [firstCall, setFirstCall] = useState(true);
+
   const [search, setSearch] = useState(false);
   const [searching, setSearching] = useState(false);
 
@@ -43,6 +47,14 @@ const Weather = (props) => {
       return false;
     }
   };
+
+  const currentDate = new Date();
+
+  const fourMonthsPrior = new Date(currentDate);
+  fourMonthsPrior.setMonth(currentDate.getMonth() - 4);
+
+  const fifteenDaysAhead = new Date(currentDate);
+  fifteenDaysAhead.setDate(currentDate.getDate() + 15);
 
   useEffect(() => {
     if (firstCall) {
@@ -123,8 +135,14 @@ const Weather = (props) => {
         Weather Section
       </h2>
       <p className="instructions">
-        Keep in mind that weather results range from 6 months prior to current
-        date until 15 days ahead
+        Keep in mind that weather results range from&nbsp;
+        {`${fourMonthsPrior.getFullYear()}/${
+          fourMonthsPrior.getMonth() + 1
+        }/${fourMonthsPrior.getDate()}`}
+        &nbsp;until&nbsp;
+        {`${fifteenDaysAhead.getFullYear()}/${
+          fifteenDaysAhead.getMonth() + 1
+        }/${fifteenDaysAhead.getDate()}`}
       </p>
 
       <form className="date-form" onSubmit={searchHandler}>
